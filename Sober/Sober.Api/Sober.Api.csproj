@@ -11,4 +11,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Sober.Contracts\Sober.Contracts.csproj" />
+    <ProjectReference Include="..\Sober.Application\Sober.Application.csproj" />
+    <ProjectReference Include="..\Sober.Infrastructure\Sober.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
