@@ -1,8 +1,6 @@
 ﻿namespace Sober.Contracts.Request
 {
-    public record RegisterRequest(
-        string FirstName,
-        string LastName,
+    public record UserLoginRequest(
         string Email,
         string Password);
 }

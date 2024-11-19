@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity.Data;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Sober.Application.Services.Interfaces;
+using Sober.Contracts.Request;
 
 namespace Sober.Api.Controllers.Authentication
 {
@@ -16,13 +16,13 @@ namespace Sober.Api.Controllers.Authentication
         }
 
         [HttpPost("register")]
-        public IActionResult Register(RegisterRequest request)
+        public IActionResult Register(UserRegisterRequest request)
         {
             return Ok(request);
         }
 
         [HttpPost("login")]
-        public IActionResult Login(LoginRequest request)
+        public IActionResult Login(UserLoginRequest request)
         {
             return Ok(request);
         }
