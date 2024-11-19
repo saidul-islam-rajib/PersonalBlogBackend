@@ -1,5 +1,9 @@
+using Sober.Application.Services.Implementations;
+using Sober.Application.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 {
+    builder.Services.AddScoped<IUserAuthenticationService, UserAuthenticationService>();
     builder.Services.AddControllers();
 }
 
