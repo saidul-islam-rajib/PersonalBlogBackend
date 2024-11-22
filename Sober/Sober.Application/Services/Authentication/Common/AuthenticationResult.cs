@@ -1,6 +1,6 @@
 ﻿using Sober.Domain.Entities;
 
-namespace Sober.Application.Services
+namespace Sober.Application.Services.Authentication.Common
 {
     public record AuthenticationResult
     (

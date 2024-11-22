@@ -1,4 +1,5 @@
 ﻿using ErrorOr;
+using Sober.Application.Services.Authentication.Common;
 
 namespace Sober.Application.Services.Interfaces
 {

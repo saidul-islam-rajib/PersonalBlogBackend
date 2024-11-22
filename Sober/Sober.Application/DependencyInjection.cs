@@ -1,6 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Sober.Application.Services.Implementations;
-using Sober.Application.Services.Interfaces;
+﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Sober.Application
 {
@@ -8,7 +7,7 @@ namespace Sober.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddScoped<IUserAuthenticationService, UserAuthenticationService>();
+            services.AddMediatR(typeof(DependencyInjection).Assembly);
             return services;
         }
     }
