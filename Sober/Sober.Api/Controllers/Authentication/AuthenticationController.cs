@@ -25,10 +25,10 @@ namespace Sober.Api.Controllers.Authentication
                 request.Password);
 
             var response = new AuthenticationResponse(
-                authRequest.Id,
-                authRequest.FirstName,
-                authRequest.LastName,
-                authRequest.Email,
+                authRequest.User.Id,
+                authRequest.User.FirstName,
+                authRequest.User.LastName,
+                authRequest.User.Email,
                 authRequest.Token);
 
             return Ok(response);
@@ -43,10 +43,10 @@ namespace Sober.Api.Controllers.Authentication
                 request.Password);
 
             var response = new AuthenticationResponse(
-                authRequest.Id,
-                authRequest.FirstName,
-                authRequest.LastName,
-                authRequest.Email,
+                authRequest.User.Id,
+                authRequest.User.FirstName,
+                authRequest.User.LastName,
+                authRequest.User.Email,
                 authRequest.Token);
 
             return Ok(response);

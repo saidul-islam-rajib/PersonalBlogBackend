@@ -36,10 +36,7 @@ namespace Sober.Application.Services.Implementations
             var userId = Guid.NewGuid();
             var token = _jwtTokenGenerator.GenerateToken(userId, "first name", "last name");
             return new AuthenticationResult(
-                userId,
-                "firstname",
-                "lastName",
-                email,
+                user,
                 token);
         }
 
@@ -66,10 +63,7 @@ namespace Sober.Application.Services.Implementations
             var token = _jwtTokenGenerator.GenerateToken(userId, firstName, lastName);
 
             return new AuthenticationResult(
-                userId,
-                firstName,
-                lastName,
-                email,
+                user,
                 token);
         }
     }

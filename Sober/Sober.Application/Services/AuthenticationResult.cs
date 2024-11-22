@@ -1,10 +1,9 @@
-﻿namespace Sober.Application.Services
+﻿using Sober.Domain.Entities;
+
+namespace Sober.Application.Services
 {
     public record AuthenticationResult
     (
-        Guid Id,
-        string FirstName,
-        string LastName,
-        string Email,
+        User User,
         string Token);
 }
