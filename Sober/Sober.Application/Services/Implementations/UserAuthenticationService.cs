@@ -34,7 +34,7 @@ namespace Sober.Application.Services.Implementations
 
             // 3. Create JWT token
             var userId = Guid.NewGuid();
-            var token = _jwtTokenGenerator.GenerateToken(userId, "first name", "last name");
+            var token = _jwtTokenGenerator.GenerateToken(user);
             return new AuthenticationResult(
                 user,
                 token);
@@ -59,8 +59,7 @@ namespace Sober.Application.Services.Implementations
             _userRepository.Add(user);
 
             // Create JWT Token
-            Guid userId = Guid.NewGuid();
-            var token = _jwtTokenGenerator.GenerateToken(userId, firstName, lastName);
+            var token = _jwtTokenGenerator.GenerateToken(user);
 
             return new AuthenticationResult(
                 user,
