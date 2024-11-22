@@ -16,11 +16,10 @@ namespace Sober.Infrastructure.Authentication
 
 
         public JwtTokenGenerator(
-            IDateTimeProvider dateTimeProvider
-            //IOptions<JwtSettings> jwtOptions
-            )
+            IDateTimeProvider dateTimeProvider,
+            IOptions<JwtSettings> jwtOptions)
         {
-            //_jwtSettings = jwtOptions.Value;
+            _jwtSettings = jwtOptions.Value;
             _dateTimeProvider = dateTimeProvider;
         }
 
@@ -28,7 +27,7 @@ namespace Sober.Infrastructure.Authentication
         {
             var signingCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes("super-secret-key-is-the-best-thing-ever")),
+                    Encoding.UTF8.GetBytes(_jwtSettings.Secret)),
                 SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
@@ -40,9 +39,9 @@ namespace Sober.Infrastructure.Authentication
             };
 
             var securityToken = new JwtSecurityToken(
-                issuer: "Rajib",
-                audience: "Public",
-                expires: _dateTimeProvider.UtcNow.AddMinutes(60),
+                issuer: _jwtSettings.Issuer,
+                audience: _jwtSettings.Audience,
+                expires: _dateTimeProvider.UtcNow.AddMinutes(_jwtSettings.ExpiryMinutes),
                 claims: claims,
                 signingCredentials: signingCredentials);
 
