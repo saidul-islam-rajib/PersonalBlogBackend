@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Sober.Api.Controllers.Base;
 using Sober.Application.Common.Errors;
 using System.Net;
 
-namespace Sober.Api.Controllers.Authentication
+namespace Sober.Api.Controllers.Errors
 {
     public class ErrorController : ApiController
     {

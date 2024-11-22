@@ -1,5 +1,6 @@
 ﻿using ErrorOr;
 using Microsoft.AspNetCore.Mvc;
+using Sober.Api.Controllers.Base;
 using Sober.Application.Services;
 using Sober.Application.Services.Interfaces;
 using Sober.Contracts.Request;

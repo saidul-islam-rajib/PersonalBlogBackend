@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Sober.Api.Http;
 using System.Net;
 
-namespace Sober.Api.Controllers
+namespace Sober.Api.Controllers.Base
 {
     [Route("api/[controller]")]
     [ApiController]
