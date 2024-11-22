@@ -1,6 +1,8 @@
-﻿using Sober.Application.Common.Interfaces.Authentication;
+﻿using ErrorOr;
+using Sober.Application.Common.Interfaces.Authentication;
 using Sober.Application.Common.Interfaces.Persistence;
 using Sober.Application.Services.Interfaces;
+using Sober.Domain.Common.Errors;
 using Sober.Domain.Entities;
 
 namespace Sober.Application.Services.Implementations
@@ -18,18 +20,18 @@ namespace Sober.Application.Services.Implementations
             _userRepository = userRepository;
         }
 
-        public AuthenticationResult Login(string email, string password)
+        public ErrorOr<AuthenticationResult> Login(string email, string password)
         {
             // 1. User does exits
             if(_userRepository.GetUserByEmail(email) is not User user)
             {
-                throw new Exception("User with given email does not exists.");
+                return Errors.Authentication.InvalidCredentials;
             }
 
             // 2. Validate user credentials (passwords)
             if(user.Password != password)
             {
-                throw new Exception("Invalid password");
+                return Errors.Authentication.InvalidCredentials;
             }
 
             // 3. Create JWT token
@@ -40,12 +42,12 @@ namespace Sober.Application.Services.Implementations
                 token);
         }
 
-        public AuthenticationResult Register(string firstName, string lastName, string email, string password)
+        public ErrorOr<AuthenticationResult> Register(string firstName, string lastName, string email, string password)
         {
             // Check if user already exists
             if(_userRepository.GetUserByEmail(email) is not null)
             {
-                throw new Exception("User with given email already exists.");
+                return Errors.User.DuplicateEmail;
             }
 
             // Create user (generate unique id) and persist into DB
