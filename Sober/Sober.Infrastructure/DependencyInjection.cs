@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Sober.Application.Common.Interfaces.Authentication;
+using Sober.Application.Common.Interfaces.Persistence;
 using Sober.Application.Common.Interfaces.Services;
 using Sober.Infrastructure.Authentication;
+using Sober.Infrastructure.Persistence;
 using Sober.Infrastructure.Services;
 
 namespace Sober.Infrastructure
@@ -12,6 +14,7 @@ namespace Sober.Infrastructure
         {
             services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+            services.AddScoped<IUserRepository, UserRepository>();
             return services;
         }
     }

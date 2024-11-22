@@ -40,7 +40,7 @@ namespace Sober.Api.Controllers.Authentication
 
             var authRequest = _authenticationService.Login(
                 request.Email,
-                "token");
+                request.Password);
 
             var response = new AuthenticationResponse(
                 authRequest.Id,
