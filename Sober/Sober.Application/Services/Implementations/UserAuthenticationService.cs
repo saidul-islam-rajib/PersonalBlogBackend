@@ -14,12 +14,19 @@ namespace Sober.Application.Services.Implementations
 
         public AuthenticationResult Login(string email, string password)
         {
+            // 1. User does exits
+
+            // 2. Validate user (password, email address)
+
+            // 3. Create JWT token
+            var userId = Guid.NewGuid();
+            var token = _jwtTokenGenerator.GenerateToken(userId, "first name", "last name");
             return new AuthenticationResult(
-                Guid.NewGuid(),
+                userId,
                 "firstname",
                 "lastName",
                 email,
-                "token");
+                token);
         }
 
         public AuthenticationResult Register(string firstName, string lastName, string email, string password)

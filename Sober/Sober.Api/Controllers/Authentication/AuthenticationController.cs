@@ -18,13 +18,38 @@ namespace Sober.Api.Controllers.Authentication
         [HttpPost("register")]
         public IActionResult Register(UserRegisterRequest request)
         {
-            return Ok(request);
+            var authRequest = _authenticationService.Register(
+                request.FirstName,
+                request.LastName,
+                request.Email,
+                request.Password);
+
+            var response = new AuthenticationResponse(
+                authRequest.Id,
+                authRequest.FirstName,
+                authRequest.LastName,
+                authRequest.Email,
+                authRequest.Token);
+
+            return Ok(response);
         }
 
         [HttpPost("login")]
         public IActionResult Login(UserLoginRequest request)
         {
-            return Ok(request);
+
+            var authRequest = _authenticationService.Login(
+                request.Email,
+                "token");
+
+            var response = new AuthenticationResponse(
+                authRequest.Id,
+                authRequest.FirstName,
+                authRequest.LastName,
+                authRequest.Email,
+                authRequest.Token);
+
+            return Ok(response);
         }
     }
 }
