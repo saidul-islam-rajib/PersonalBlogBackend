@@ -23,6 +23,8 @@ namespace Sober.Application.Services.Authentication.Commands
 
         public async Task<ErrorOr<AuthenticationResult>> Handle(RegisterCommand command, CancellationToken cancellationToken)
         {
+            await Task.CompletedTask;
+
             // 1. Validate the user the doesn't exists
             if (_userRepository.GetUserByEmail(command.Email) is not null)
             {

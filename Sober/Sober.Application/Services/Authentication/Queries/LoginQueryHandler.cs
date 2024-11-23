@@ -23,6 +23,8 @@ namespace Sober.Application.Services.Authentication.Queries
 
         public async Task<ErrorOr<AuthenticationResult>> Handle(LoginQuery query, CancellationToken cancellationToken)
         {
+            await Task.CompletedTask;
+
             // 1. User does exits
             if (_userRepository.GetUserByEmail(query.Email) is not User user)
             {

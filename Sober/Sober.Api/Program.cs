@@ -1,16 +1,13 @@
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Sober.Api.ErrorHandling.ProlemDetailFactory;
+using Sober.Api;
 using Sober.Application;
 using Sober.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services
+        .AddPresentation()
         .AddApplication()
         .AddInfrastructure(builder.Configuration);
-
-    builder.Services.AddControllers();
-    builder.Services.AddSingleton<ProblemDetailsFactory, SoberProblemDetailsFactory>();
 }
 
 builder.Services.AddEndpointsApiExplorer();
