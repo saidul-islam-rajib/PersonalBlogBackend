@@ -1,6 +1,7 @@
 ﻿using ErrorOr;
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Sober.Api.Controllers.Base;
 using Sober.Application.Services.Authentication.Commands;
@@ -11,6 +12,7 @@ using Sober.Contracts.Request;
 namespace Sober.Api.Controllers.Authentication
 {
     [Route("auth")]
+    [AllowAnonymous]
     public class AuthenticationController : ApiController
     {
         private readonly ISender _mediator;
