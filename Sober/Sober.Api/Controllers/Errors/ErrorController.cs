@@ -6,20 +6,20 @@ using System.Net;
 
 namespace Sober.Api.Controllers.Errors
 {
-    public class ErrorController : ApiController
-    {
-        [Route("/error")]
-        public IActionResult Error()
-        {
-            Exception? excepton = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
+    //public class ErrorController : ApiController
+    //{
+    //    [Route("/error")]
+    //    public IActionResult Error()
+    //    {
+    //        Exception? excepton = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
 
-            var (statusCode, message) = excepton switch
-            {
-                IServiceException serviceException => ((int)serviceException.StatusCode, serviceException.ErrorMessage),
-                _ => ((int)HttpStatusCode.InternalServerError, "An unexpected error occurred.")
-            };
+    //        var (statusCode, message) = excepton switch
+    //        {
+    //            IServiceException serviceException => ((int)serviceException.StatusCode, serviceException.ErrorMessage),
+    //            _ => ((int)HttpStatusCode.InternalServerError, "An unexpected error occurred.")
+    //        };
 
-            return Problem(statusCode: statusCode, title: message);
-        }
-    }
+    //        return Problem(statusCode: statusCode, title: message);
+    //    }
+    //}
 }
