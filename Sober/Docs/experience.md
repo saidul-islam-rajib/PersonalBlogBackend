@@ -43,10 +43,10 @@ POST /user/{:id}/experience
   "isFullTimeEmployee": true,
   "skills": [
     {
-      "skillName": "Data structure & Algorithms"
+      "skillId": "123e4567-e89b-12d3-a456-426614174000"
     },
     {      
-      "skillName": "Computer Networks"
+      "skillId": "123e4567-e89b-12d3-a456-426614174000"
     }
   ]
 }
