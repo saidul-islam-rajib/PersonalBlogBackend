@@ -1,4 +1,4 @@
-﻿namespace Sober.Contracts.Request
+﻿namespace Sober.Contracts.Response.Authentication
 {
     public record AuthenticationResponse(
         Guid Id,

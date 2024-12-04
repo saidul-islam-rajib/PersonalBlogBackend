@@ -7,7 +7,8 @@ using Sober.Api.Controllers.Base;
 using Sober.Application.Services.Authentication.Commands;
 using Sober.Application.Services.Authentication.Common;
 using Sober.Application.Services.Authentication.Queries;
-using Sober.Contracts.Request;
+using Sober.Contracts.Request.Authentication;
+using Sober.Contracts.Response.Authentication;
 
 namespace Sober.Api.Controllers.Authentication
 {

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.Data;
 using Sober.Application.Services.Authentication.Commands;
 using Sober.Application.Services.Authentication.Common;
 using Sober.Application.Services.Authentication.Queries;
-using Sober.Contracts.Request;
+using Sober.Contracts.Response.Authentication;
 
 namespace Sober.Api.Common.Mappings
 {

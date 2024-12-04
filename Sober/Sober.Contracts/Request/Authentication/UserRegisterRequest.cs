@@ -1,4 +1,4 @@
-﻿namespace Sober.Contracts.Request
+﻿namespace Sober.Contracts.Request.Authentication
 {
     public record UserRegisterRequest(
         string FirstName,
