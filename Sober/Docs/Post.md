@@ -35,22 +35,22 @@ POST /user/{:id}/post
 ```
 ```json
 {
-  "title": "HELPFUL TIPS TO BECOME SOFTWARE ENGINEER",
-  "abstract": "This tips will helpful for those people want...", 
+  "postTitle": "HELPFUL TIPS TO BECOME SOFTWARE ENGINEER",
+  "postAbstract": "This tips will helpful for those people want...", 
   "sections": [
     {
-      "title": "INTRODUCTION",
-      "description": "1st section description will be here",
+      "sectionTitle": "INTRODUCTION",
+      "sectionDescription": "1st section description will be here",
       "items": [
         {
           "itemTitle": "SELF OBSERVATION",
           "itemDescription": "1st item description will be here",
-          "itemImages":"image link will be here."
+          "itemImageLink":"image link will be here."
         },
         {
           "itemTitle": "SELF OBSERVATION",
           "itemDescription": "1st item description will be here",
-          "itemImages":"image link will be here."
+          "itemImageLink":"image link will be here."
         }
       ]
     }
@@ -69,12 +69,11 @@ GET /post/{:id}
 {
     "postId": "6126960c-0e94-46d6-a270-e836bf767b6a",
     "title": "HELPFUL TIPS TO BECOME SOFTWARE ENGINEER",
-    "abstract": "This tips will helpful for those people want...",
-    "averageRating": 0,    
+    "abstract": "This tips will helpful for those people want...",   
     "sections": [
       {
         "sectionId": "07e8b33e-5b0c-4fc2-b284-2c92e5dd3fd9",
-        "title": "INTRODUCTION",
+        "sectionTitle": "INTRODUCTION",
         "description": "1st section description will be here",
         "items": [
           {

@@ -1,29 +1,29 @@
 ﻿namespace Sober.Contracts.Response.Posts
 {
     public record PostResponse(
-        Guid postId,
-        string postTitle,
-        string postAbstract,
+        Guid PostId,
+        string PostTitle,
+        string PostAbstract,
         List<PostSectionResponse> Sections,
-        List<TopicResponse> Topics,
-        string userId,
+        List<TopicResponse> TopicIds,
+        string UserId,
         DateTime CreatedDateTime,
         DateTime UpdatedDateTime);
 
     public record PostSectionResponse(
-        string sectionId,
-        string sectionTitle,
-        string sectionDescription,
+        string SectionId,
+        string SectionTitle,
+        string SectionDescription,
         List<PostSectionItemResponse> Items);
 
     public record PostSectionItemResponse(
-        string itemId,
-        string itemTitle,
-        string itemDescription,
-        string itemImageLink);
+        string ItemId,
+        string ItemTitle,
+        string ItemDescription,
+        string ItemImageLink);
 
     public record TopicResponse(
-        string topicId,
-        string topicTitle,
-        string userId);
+        string TopicId,
+        string TopicTitle,
+        string UserId);
 }

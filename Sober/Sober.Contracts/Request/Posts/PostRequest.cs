@@ -1,23 +1,23 @@
 ﻿namespace Sober.Contracts.Request.Posts
 {
     public record PostRequest(
-        string postTitle,
-        string postAbstract,
+        string PostTitle,
+        string PostAbstract,
         List<PostSectionRequest> Sections,
         List<TopicRequest> Topics);
 
     public record PostSectionRequest(
-        string sectionTitle,
-        string sectionDescription,
+        string SectionTitle,
+        string SectionDescription,
         List<PostSectionItemRequest> Items);
 
     public record PostSectionItemRequest(
-        string itemTitle,
-        string itemDescription,
-        string itemImageLink);
+        string ItemTitle,
+        string ItemDescription,
+        string ItemImageLink);
 
     public record TopicRequest(
-        string topicTitle,
-        string userId);
+        string TopicTitle,
+        string UserId);
 
 }

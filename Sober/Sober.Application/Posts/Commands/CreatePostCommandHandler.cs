@@ -1,0 +1,45 @@
+﻿using ErrorOr;
+using MediatR;
+using Sober.Application.Interfaces;
+using Sober.Domain.Aggregates.PostAggregate;
+using Sober.Domain.Aggregates.PostAggregate.Entities;
+using Sober.Domain.Aggregates.UserAggregate.ValueObjects;
+
+namespace Sober.Application.Posts.Commands
+{
+    public class CreatePostCommandHandler : IRequestHandler<CreatePostCommand, ErrorOr<Post>>
+    {
+        private readonly IPostRepository _postRepository;
+
+        public CreatePostCommandHandler(IPostRepository postRepository)
+        {
+            _postRepository = postRepository;
+        }
+
+        public async Task<ErrorOr<Post>> Handle(CreatePostCommand request, CancellationToken cancellationToken)
+        {
+            await Task.CompletedTask;
+
+            // 1. Create Post
+            Post post = Post.Create(
+                UserId.Create(request.UserId),
+                request.PostTitle,
+                request.PostAbstract,
+                request.Sections.ConvertAll(section => PostSection.Create(
+                    section.SectionTitle,
+                    section.SectionDescription,
+                    section.Items.ConvertAll(item => PostItem.Create(
+                        item.ItemTitle,
+                        item.ItemDescription,
+                        item.ItemImageLink)))),
+                request.Topics.ConvertAll(topic => PostTopic.Create(topic.TopicTitle)));
+
+
+            // 2. Persist into DB
+            //_postRepository.Add(post);
+
+            // 3. Return Post
+            return post;
+        }
+    }
+}
