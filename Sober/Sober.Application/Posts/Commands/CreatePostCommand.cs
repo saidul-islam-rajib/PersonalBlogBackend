@@ -23,5 +23,6 @@ namespace Sober.Application.Posts.Commands
         string ItemImageLink);
 
     public record TopicCommand(
+        Guid UserId,
         string TopicTitle);
 }

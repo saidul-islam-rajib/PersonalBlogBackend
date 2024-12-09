@@ -28,7 +28,7 @@ namespace Sober.Api.Controllers.Posts
             var result = await _mediator.Send(command);
 
             var response = result.Match(
-                menu => Ok(_mapper.Map<PostResponse>(menu)),
+                post => Ok(_mapper.Map<PostResponse>(post)),
                 errors => Problem(errors));
 
             return response;

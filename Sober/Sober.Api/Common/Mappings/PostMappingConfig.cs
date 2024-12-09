@@ -30,7 +30,7 @@ namespace Sober.Api.Common.Mappings
 
             config.NewConfig<PostTopic, TopicResponse>()
                 .Map(dest => dest.TopicId, src => src.Id.Value)
-                .Map(dest => dest.UserId, src => src.Id.Value)
+                .Map(dest => dest.UserId, src => src.UserId.Value)
                 .Map(dest => dest.TopicTitle, src => src.TopicTitle);
         }
     }

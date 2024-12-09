@@ -22,17 +22,19 @@ namespace Sober.Application.Posts.Commands
 
             // 1. Create Post
             Post post = Post.Create(
-                UserId.Create(request.UserId),
-                request.PostTitle,
-                request.PostAbstract,
-                request.Sections.ConvertAll(section => PostSection.Create(
+                userId: UserId.Create(request.UserId),
+                postTitle: request.PostTitle,
+                postAbstract: request.PostAbstract,
+                sections: request.Sections.ConvertAll(section => PostSection.Create(
                     section.SectionTitle,
                     section.SectionDescription,
                     section.Items.ConvertAll(item => PostItem.Create(
                         item.ItemTitle,
                         item.ItemDescription,
                         item.ItemImageLink)))),
-                request.Topics.ConvertAll(topic => PostTopic.Create(topic.TopicTitle)));
+                topics: request.Topics.ConvertAll(topic => PostTopic.Create(
+                    UserId.Create(request.UserId),
+                    topic.TopicTitle)));
 
 
             // 2. Persist into DB
