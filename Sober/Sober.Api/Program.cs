@@ -8,6 +8,19 @@ var builder = WebApplication.CreateBuilder(args);
         .AddPresentation()
         .AddApplication()
         .AddInfrastructure(builder.Configuration);
+
+
+    // Add CORS policy
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("Rajib", policy =>
+        {
+            policy.WithOrigins("http://localhost:4200")
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials();
+        });
+    });
 }
 
 builder.Services.AddEndpointsApiExplorer();
@@ -19,6 +32,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("Rajib");
 
 app.UseExceptionHandler("/error");
 app.UseHttpsRedirection();
