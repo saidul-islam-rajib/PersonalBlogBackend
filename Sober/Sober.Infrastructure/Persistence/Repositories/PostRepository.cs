@@ -39,14 +39,22 @@ namespace Sober.Infrastructure.Persistence.Repositories
             return response;
         }
 
-        public Task<IEnumerable<Post>> GetPostByTitle(string title)
+        public async Task<IEnumerable<Post>> GetPostByTitle(string title)
         {
-            throw new NotImplementedException();
+            var response = await _dbContext.Posts.Include(post => post.Sections)
+                                                 .ThenInclude(section => section.Items)
+                                                 .Where(post => post.PostTitle.Contains(title))
+                                                 .ToListAsync();
+            return response;
         }
 
-        public Task<IEnumerable<Post>> GetPostByTopic(string topic)
+        public async Task<IEnumerable<Post>> GetPostByTopic(string title)
         {
-            throw new NotImplementedException();
+            var response = await _dbContext.Posts.Include(post => post.Sections)
+                                                 .ThenInclude(section => section.Items)
+                                                 .Where(post => post.TopicIds.Any(topic => topic.TopicTitle.Contains(title)))
+                                                 .ToListAsync();
+            return response;
         }
 
         public void UpdatePost(Post post)

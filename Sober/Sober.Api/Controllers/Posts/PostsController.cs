@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Sober.Api.Controllers.Base;
 using Sober.Application.Posts.Commands;
-using Sober.Application.Posts.Queries;
+using Sober.Application.Posts.Queries.Query;
 using Sober.Contracts.Request.Posts;
 using Sober.Contracts.Response.Posts;
 
@@ -58,6 +58,21 @@ namespace Sober.Api.Controllers.Posts
             }
 
             var response = _mapper.Map<PostResponse>(post);
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("get-post-by-title")]
+        public async Task<IActionResult> GetPostByTitle(string title)
+        {
+            var query = new GetPostByTitleQuery(title);
+            var posts = await _mediator.Send(query);
+            if(posts is null)
+            {
+                return NotFound();
+            }
+
+            var response = _mapper.Map<IEnumerable<PostResponse>>(posts);
             return Ok(response);
         }
     }

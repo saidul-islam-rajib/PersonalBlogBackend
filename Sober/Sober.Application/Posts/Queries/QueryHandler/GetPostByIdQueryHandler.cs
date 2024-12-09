@@ -1,8 +1,9 @@
 ﻿using MediatR;
 using Sober.Application.Interfaces;
+using Sober.Application.Posts.Queries.Query;
 using Sober.Domain.Aggregates.PostAggregate;
 
-namespace Sober.Application.Posts.Queries
+namespace Sober.Application.Posts.Queries.QueryHandler
 {
     public class GetPostByIdQueryHandler : IRequestHandler<GetPostByIdQuery, Post>
     {
