@@ -32,7 +32,7 @@ namespace Sober.Infrastructure
             this IServiceCollection services)
         {
             services.AddDbContext<BlogDbContext>(options =>
-                options.UseSqlServer("Data Source=SAIDUL-INTERN;Initial Catalog=SoberDinnerDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"));
+                options.UseSqlServer("Data Source=SAIDUL-INTERN;Initial Catalog=PersonalBlogDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"));
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
