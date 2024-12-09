@@ -38,7 +38,7 @@ namespace Sober.Application.Posts.Commands
 
 
             // 2. Persist into DB
-            //_postRepository.Add(post);
+            _postRepository.CreatePost(post);
 
             // 3. Return Post
             return post;

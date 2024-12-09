@@ -6,11 +6,9 @@ namespace Sober.Domain.Aggregates.PostAggregate.Entities
     public sealed class PostSection : Entity<PostSectionId>
     {
         private readonly List<PostItem> _items = new();
-        private readonly List<PostTopic> _topics = new();
         public string SectionTitle { get; private set; } = null!;
         public string SectionDescription { get; private set; } = null!;
         public IReadOnlyList<PostItem> Items => _items.AsReadOnly();
-        public IReadOnlyList<PostTopic> Topics => _topics.AsReadOnly();
 
         private PostSection(
             PostSectionId sectionId,
