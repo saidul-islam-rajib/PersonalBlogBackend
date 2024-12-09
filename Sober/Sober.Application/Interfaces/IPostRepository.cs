@@ -6,10 +6,10 @@ namespace Sober.Application.Interfaces
     {
         void CreatePost(Post post);
         void UpdatePost(Post post);
-        bool DeletePost(Guid id);
+        bool DeletePost(Guid postId);
         Task<IEnumerable<Post>> GetAllPostAsync();
-        Task<Post> GetPostById(Guid id);
-        Task<IEnumerable<Post>> GetPostByTitle(string title);
+        Task<Post> GetPostByIdAsync(Guid postId);
+        Task<IEnumerable<Post>> GetPostByTitle(string postTitle);
         Task<IEnumerable<Post>> GetPostByTopic(string topic);
     }
 }

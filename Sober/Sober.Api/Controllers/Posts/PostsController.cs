@@ -45,5 +45,20 @@ namespace Sober.Api.Controllers.Posts
 
             return Ok(response);
         }
+
+        [HttpGet]
+        [Route("{postId}")]
+        public async Task<IActionResult> GetPostByIdQuery(Guid postId)
+        {
+            var query = new GetPostByIdQuery(postId);
+            var post = await _mediator.Send(query);
+            if(post is null)
+            {
+                return NotFound();
+            }
+
+            var response = _mapper.Map<PostResponse>(post);
+            return Ok(response);
+        }
     }
 }

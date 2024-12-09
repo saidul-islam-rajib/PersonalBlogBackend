@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sober.Application.Interfaces;
 using Sober.Domain.Aggregates.PostAggregate;
+using Sober.Domain.Aggregates.PostAggregate.ValueObjects;
 
 namespace Sober.Infrastructure.Persistence.Repositories
 {
@@ -30,9 +31,12 @@ namespace Sober.Infrastructure.Persistence.Repositories
             return response;
         }
 
-        public Task<Post> GetPostById(Guid id)
+        public async Task<Post> GetPostByIdAsync(Guid postId)
         {
-            throw new NotImplementedException();
+            var response = await _dbContext.Posts.Include(post => post.Sections)
+                                  .ThenInclude(section => section.Items)
+                                  .FirstOrDefaultAsync(post => post.Id.Equals(new PostId(postId)));
+            return response;
         }
 
         public Task<IEnumerable<Post>> GetPostByTitle(string title)
