@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Sober.Api.Controllers.Base;
 using Sober.Application.Posts.Commands;
+using Sober.Application.Posts.Queries;
 using Sober.Contracts.Request.Posts;
 using Sober.Contracts.Response.Posts;
 
@@ -32,6 +33,17 @@ namespace Sober.Api.Controllers.Posts
                 errors => Problem(errors));
 
             return response;
+        }
+
+        [HttpGet]
+        [Route("get-all-posts")]
+        public async Task<IActionResult> GetAllPosts()
+        {
+            var query = new GetAllPostsQuery();
+            var posts = await _mediator.Send(query);
+            var response = _mapper.Map<IEnumerable<PostResponse>>(posts);
+
+            return Ok(response);
         }
     }
 }

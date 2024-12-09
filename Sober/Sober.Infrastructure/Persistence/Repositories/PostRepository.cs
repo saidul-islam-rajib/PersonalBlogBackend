@@ -26,7 +26,7 @@ namespace Sober.Infrastructure.Persistence.Repositories
 
         public async Task<IEnumerable<Post>> GetAllPostAsync()
         {
-            var response = await _dbContext.Posts.ToListAsync();
+            var response = await _dbContext.Posts.AsNoTracking().ToListAsync();
             return response;
         }
 

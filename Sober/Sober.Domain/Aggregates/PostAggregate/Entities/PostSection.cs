@@ -8,7 +8,7 @@ namespace Sober.Domain.Aggregates.PostAggregate.Entities
         private readonly List<PostItem> _items = new();
         public string SectionTitle { get; private set; } = null!;
         public string SectionDescription { get; private set; } = null!;
-        public IReadOnlyList<PostItem> Items => _items.AsReadOnly();
+        public ICollection<PostItem> Items => _items;
 
         private PostSection(
             PostSectionId sectionId,

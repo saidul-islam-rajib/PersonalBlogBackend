@@ -11,8 +11,8 @@ namespace Sober.Domain.Aggregates.PostAggregate
         private readonly List<PostTopic> _topics = new();
         public string PostTitle { get; private set; } = null!;
         public string PostAbstract { get; private set; } = null!;
-        public IReadOnlyList<PostSection> Sections => _sections.AsReadOnly();
-        public IReadOnlyList<PostTopic> TopicIds => _topics.AsReadOnly();
+        public ICollection<PostSection> Sections => _sections;
+        public ICollection<PostTopic> TopicIds => _topics;
         public UserId UserId { get; private set; }
         public DateTime CreatedDateTime { get; private set; }
         public DateTime UpdatedDateTime { get; private set; }
