@@ -31,6 +31,8 @@ namespace Sober.Domain.Aggregates.PostAggregate
             PostAbstract = postAbstract;
             _sections = sections;
             _topics = topics;
+            CreatedDateTime = DateTime.UtcNow;
+            UpdatedDateTime = DateTime.UtcNow;
         }
 
         public static Post Create(
