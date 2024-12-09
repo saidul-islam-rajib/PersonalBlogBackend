@@ -43,5 +43,10 @@ namespace Sober.Domain.Aggregates.PostAggregate
             Post postResponse = new Post(PostId.CreateUnique(), userId, postTitle, postAbstract, sections, topics);
             return postResponse;
         }
+
+        public Post()
+        {
+            
+        }
     }
 }

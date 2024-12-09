@@ -29,5 +29,10 @@ namespace Sober.Domain.Aggregates.PostAggregate.Entities
 
             return topic;
         }
+
+        public PostTopic()
+        {
+            
+        }
     }
 }
