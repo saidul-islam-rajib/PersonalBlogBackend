@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Sober.Api.Controllers.Base;
 using Sober.Application.Pages.Comments.Commands;
+using Sober.Application.Pages.Comments.Queries.Query;
 using Sober.Contracts.Request.Comments;
 using Sober.Contracts.Response.Comments;
 
@@ -32,6 +33,21 @@ namespace Sober.Api.Controllers.Comments
                 errors => Problem(errors));
 
             return response;
+        }
+
+        [HttpGet]
+        [Route("get-all-comments")]
+        public async Task<IActionResult> GetAllComments()
+        {
+            var query = new GetAllCommentsQuery();
+            var comments = await _mediator.Send(query);
+            if(comments is null)
+            {
+                return NotFound();
+            }
+
+            var response = _mapper.Map<IEnumerable<CommentResponse>>(comments);
+            return Ok(response);
         }
     }
 }

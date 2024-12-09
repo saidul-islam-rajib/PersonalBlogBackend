@@ -1,4 +1,5 @@
-﻿using Sober.Application.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Sober.Application.Interfaces;
 using Sober.Domain.Aggregates.CommentAggregate;
 
 namespace Sober.Infrastructure.Persistence.Repositories
@@ -23,9 +24,10 @@ namespace Sober.Infrastructure.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Comment>> GetAllCommentAsync()
+        public async Task<IEnumerable<Comment>> GetAllCommentAsync()
         {
-            throw new NotImplementedException();
+            var response = await _dbContext.Comments.AsNoTracking().ToListAsync();
+            return response;
         }
     }
 }
