@@ -38,9 +38,10 @@ namespace Sober.Infrastructure.Persistence.Repositories
             return response;
         }
 
-        public Task<IEnumerable<Comment>> GetCommentByPostTitle(string postTitle)
+        public async Task<IEnumerable<Comment>> GetCommentByPostTitle(string postTitle)
         {
-            throw new NotImplementedException();
+            var response = await _dbContext.Comments.Where(post => post.PostTitle.Contains(postTitle)).ToListAsync();
+            return response;
         }
     }
 }

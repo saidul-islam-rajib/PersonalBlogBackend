@@ -6,6 +6,7 @@ using Sober.Application.Pages.Comments.Commands;
 using Sober.Application.Pages.Comments.Queries.Query;
 using Sober.Contracts.Request.Comments;
 using Sober.Contracts.Response.Comments;
+using Sober.Domain.Aggregates.CommentAggregate;
 
 namespace Sober.Api.Controllers.Comments
 {
@@ -41,7 +42,7 @@ namespace Sober.Api.Controllers.Comments
         {
             var query = new GetAllCommentsQuery();
             var comments = await _mediator.Send(query);
-            if(comments is null)
+            if (comments is null)
             {
                 return NotFound();
             }
@@ -56,12 +57,26 @@ namespace Sober.Api.Controllers.Comments
         {
             var query = new GetCommentByIdQuery(commentId);
             var comment = await _mediator.Send(query);
-            if(comment is null)
+            if (comment is null)
             {
                 return NotFound();
             }
 
             var response = _mapper.Map<CommentResponse>(comment);
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("get-comments-by-post-title")]
+        public async Task<IActionResult> GetCommentByPostTitle(string postTitle)
+        {
+            var query = new GetCommentByPostTitleQuery(postTitle);
+            var comments = await _mediator.Send(query);
+            if(comments is null)
+            {
+                return NotFound(postTitle);
+            }
+            var response = _mapper.Map<IEnumerable<Comment>>(comments);
             return Ok(response);
         }
     }
