@@ -10,6 +10,6 @@ namespace Sober.Application.Interfaces
         Task<IEnumerable<Post>> GetAllPostAsync();
         Task<Post> GetPostByIdAsync(Guid postId);
         Task<IEnumerable<Post>> GetPostByTitle(string postTitle);
-        Task<IEnumerable<Post>> GetPostByTopic(string topic);
+        Task<IEnumerable<Post>> GetPostByTopicTitle(string topic);
     }
 }

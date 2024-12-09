@@ -48,11 +48,11 @@ namespace Sober.Infrastructure.Persistence.Repositories
             return response;
         }
 
-        public async Task<IEnumerable<Post>> GetPostByTopic(string title)
+        public async Task<IEnumerable<Post>> GetPostByTopicTitle(string topicTitle)
         {
             var response = await _dbContext.Posts.Include(post => post.Sections)
                                                  .ThenInclude(section => section.Items)
-                                                 .Where(post => post.TopicIds.Any(topic => topic.TopicTitle.Contains(title)))
+                                                 .Where(post => post.TopicIds.Any(topic => topic.TopicTitle.Contains(topicTitle)))
                                                  .ToListAsync();
             return response;
         }

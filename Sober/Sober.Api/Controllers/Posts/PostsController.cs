@@ -75,5 +75,20 @@ namespace Sober.Api.Controllers.Posts
             var response = _mapper.Map<IEnumerable<PostResponse>>(posts);
             return Ok(response);
         }
+
+        [HttpGet]
+        [Route("get-post-by-topic-title")]
+        public async Task<IActionResult> GetPostByTopicTitle(string topicTitle)
+        {
+            var query = new GetPostByTopicTitleQuery(topicTitle);
+            var posts = await _mediator.Send(query);
+            if(posts is null)
+            {
+                return NotFound();
+            }
+
+            var response = _mapper.Map<IEnumerable<PostResponse>>(posts);
+            return Ok(response);
+        }
     }
 }
