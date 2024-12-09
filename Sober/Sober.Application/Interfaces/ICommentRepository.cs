@@ -1,0 +1,11 @@
+﻿using Sober.Domain.Aggregates.CommentAggregate;
+
+namespace Sober.Application.Interfaces
+{
+    public interface ICommentRepository
+    {
+        void CreateComment(Comment comment);
+        bool DeleteComment(Guid commentId);
+        Task<IEnumerable<Comment>> GetAllCommentAsync();
+    }
+}
