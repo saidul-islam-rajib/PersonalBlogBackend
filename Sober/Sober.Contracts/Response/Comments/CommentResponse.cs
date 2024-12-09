@@ -4,7 +4,7 @@
         Guid CommentId,
         string PostId,
         string PostTitle,
-        string CommentorName,
-        string Comment,
+        string Name,
+        string Comments,
         DateTime date);
 }

@@ -2,6 +2,6 @@
 {
     public record CommentRequest(
         string PostId,
-        string GuestName,
-        string Comment);
+        string Name,
+        string Comments);
 }

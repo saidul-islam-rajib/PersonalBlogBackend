@@ -4,32 +4,42 @@ using Sober.Domain.Common.Models;
 
 namespace Sober.Domain.Aggregates.CommentAggregate
 {
-    public class Comment : AggregateRoot<CommentId>
+    public sealed class Comment : AggregateRoot<CommentId>
     {
         public string PostTitle { get; private set; } = null!;
-        public string CommentorName { get; private set; } = null!;
-        public string CommentorComment { get; private set; } = null!;
+        public string Name { get; private set; } = null!;
+        public string Comments { get; private set; } = null!;
         public DateTime Date { get; private set; }
         public PostId PostId { get; private set; }
-
-
 
         private Comment(
             CommentId commentId,
             PostId postId,
             string commentorName,
-            string commentorComment)
+            string commentorComment,
+            string postTitle) : base(commentId)
         {
             PostId = postId;
-            CommentorName = commentorName;
-            CommentorComment = commentorComment;
+            Name = commentorName;
+            Comments = commentorComment;
+            PostTitle = postTitle;
             Date = DateTime.Now;
         }
 
-        public static Comment Create(PostId postId, string commentorName, string commentorComment)
+        public static Comment Create(
+            PostId postId,
+            string commentorName,
+            string commentorComment,
+            string postTitle)
         {
-            Comment comment = new Comment(CommentId.CreateUnique(), postId, commentorName, commentorComment);
-            return comment;
+            Comment response = new Comment(
+                CommentId.CreateUnique(),
+                postId,
+                commentorName,
+                commentorComment,
+                postTitle);
+
+            return response;
         }
 
         public Comment()

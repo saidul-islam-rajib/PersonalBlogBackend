@@ -2,7 +2,7 @@
 
 namespace Sober.Domain.Aggregates.CommentAggregate.ValueObjects
 {
-    public class CommentId : ValueObject
+    public sealed class CommentId : ValueObject
     {
         public Guid Value { get; private set; }
         public CommentId(Guid value)
@@ -22,11 +22,6 @@ namespace Sober.Domain.Aggregates.CommentAggregate.ValueObjects
         public override IEnumerable<object> GetEqualityComponents()
         {
             yield return Value;
-        }
-
-        public CommentId()
-        {
-            
         }
     }
 }

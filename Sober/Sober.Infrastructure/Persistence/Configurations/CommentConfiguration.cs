@@ -20,8 +20,8 @@ namespace Sober.Infrastructure.Persistence.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedNever().HasConversion(id => id.Value, value => CommentId.Create(value));
             
-            builder.Property(x => x.CommentorName).HasMaxLength(100);            
-            builder.Property(x => x.CommentorComment).HasMaxLength(500);
+            builder.Property(x => x.Name).HasMaxLength(100);            
+            builder.Property(x => x.Comments).HasMaxLength(500);
 
             builder.Property(x => x.PostTitle).HasMaxLength(100);
             builder.Property(x => x.PostId).HasConversion(id => id.Value, value => PostId.Create(value)).IsRequired();

@@ -6,8 +6,8 @@ namespace Sober.Domain.Aggregates.CommentAggregate.Entities
 {
     public class CommentSection : Entity<CommentId>
     {
-        public string CommentorName { get; private set; } = null!;
-        public string CommentorComment { get; private set; } = null!;
+        public string Name { get; private set; } = null!;
+        public string Comments { get; private set; } = null!;
         public PostId PostId { get; private set; } = null!;
 
         private CommentSection(
@@ -16,8 +16,8 @@ namespace Sober.Domain.Aggregates.CommentAggregate.Entities
             string commentorComment,
             PostId postId) : base(commentId)
         {
-            CommentorName = commentorName;
-            CommentorComment = commentorComment;
+            Name = commentorName;
+            Comments = commentorComment;
             PostId = postId;
         }
 

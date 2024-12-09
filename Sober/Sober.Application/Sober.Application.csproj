@@ -18,4 +18,9 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Comments\Queries\QueryHandler\" />
+    <Folder Include="Pages\Comments\Queries\Query\" />
+  </ItemGroup>
+
 </Project>

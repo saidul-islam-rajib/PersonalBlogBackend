@@ -5,9 +5,17 @@ namespace Sober.Infrastructure.Persistence.Repositories
 {
     public class CommentRepository : ICommentRepository
     {
+        private readonly BlogDbContext _dbContext;
+
+        public CommentRepository(BlogDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public void CreateComment(Comment comment)
         {
-            throw new NotImplementedException();
+            _dbContext.Add(comment);
+            _dbContext.SaveChanges();
         }
 
         public bool DeleteComment(Guid commentId)
