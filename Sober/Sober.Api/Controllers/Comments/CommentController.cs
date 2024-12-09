@@ -49,5 +49,20 @@ namespace Sober.Api.Controllers.Comments
             var response = _mapper.Map<IEnumerable<CommentResponse>>(comments);
             return Ok(response);
         }
+
+        [HttpGet]
+        [Route("{commentId}")]
+        public async Task<IActionResult> GetCommentById(Guid commentId)
+        {
+            var query = new GetCommentByIdQuery(commentId);
+            var comment = await _mediator.Send(query);
+            if(comment is null)
+            {
+                return NotFound();
+            }
+
+            var response = _mapper.Map<CommentResponse>(comment);
+            return Ok(response);
+        }
     }
 }

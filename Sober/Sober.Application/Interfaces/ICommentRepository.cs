@@ -7,5 +7,7 @@ namespace Sober.Application.Interfaces
         void CreateComment(Comment comment);
         bool DeleteComment(Guid commentId);
         Task<IEnumerable<Comment>> GetAllCommentAsync();
+        Task<Comment> GetCommentByIdAsync(Guid commentId);
+        Task<IEnumerable<Comment>> GetCommentByPostTitle(string postTitle);
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sober.Application.Interfaces;
 using Sober.Domain.Aggregates.CommentAggregate;
+using Sober.Domain.Aggregates.CommentAggregate.ValueObjects;
+using Sober.Domain.Aggregates.PostAggregate.ValueObjects;
 
 namespace Sober.Infrastructure.Persistence.Repositories
 {
@@ -28,6 +30,17 @@ namespace Sober.Infrastructure.Persistence.Repositories
         {
             var response = await _dbContext.Comments.AsNoTracking().ToListAsync();
             return response;
+        }
+
+        public async Task<Comment> GetCommentByIdAsync(Guid commentId)
+        {
+            var response = await _dbContext.Comments.FirstOrDefaultAsync(comment => comment.Id.Equals(new CommentId(commentId)));
+            return response;
+        }
+
+        public Task<IEnumerable<Comment>> GetCommentByPostTitle(string postTitle)
+        {
+            throw new NotImplementedException();
         }
     }
 }
