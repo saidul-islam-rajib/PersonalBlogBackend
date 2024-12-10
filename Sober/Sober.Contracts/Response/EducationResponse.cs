@@ -4,6 +4,7 @@ namespace Sober.Contracts.Response
 {
     public record EducationResponse(
         Guid EducationId,
+        string UserId,
         string InstituteName,
         string InstituteLogo,
         string Department,
