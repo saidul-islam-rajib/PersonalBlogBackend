@@ -17,7 +17,7 @@ namespace Sober.Domain.Aggregates.SkillAggregate
             return response;
         }
 
-        public Skill()
+        private Skill()
         {
             
         }
