@@ -39,6 +39,7 @@ namespace Sober.Infrastructure
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<ISkillRepository, SkillRepository>();
             services.AddScoped<IExperienceRepository, ExperienceRepository>();
+            services.AddScoped<IEducationRepository, EducationRepository>();
 
             return services;
         }
