@@ -1,5 +1,4 @@
 ﻿using ErrorOr;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Sober.Api.Http;
@@ -7,7 +6,7 @@ using System.Net;
 
 namespace Sober.Api.Controllers.Base
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     //[Authorize]
     public class ApiController : ControllerBase

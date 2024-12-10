@@ -10,7 +10,7 @@ using Sober.Domain.Aggregates.CommentAggregate;
 
 namespace Sober.Api.Controllers.Comments
 {
-    [Route("[controller]")]
+    [Route("comment")]
     public class CommentController : ApiController
     {
         private readonly IMapper _mapper;
@@ -23,7 +23,7 @@ namespace Sober.Api.Controllers.Comments
         }
 
         [HttpPost]
-        [Route("posts/{postId}/comment")]
+        [Route("posts/{postId}/create-comment")]
         public async Task<IActionResult> CreateComment(CommentRequest request, Guid postId)
         {
             var command = _mapper.Map<CreateCommentCommand>((request, postId));

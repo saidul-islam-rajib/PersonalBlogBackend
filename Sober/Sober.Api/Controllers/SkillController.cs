@@ -2,18 +2,14 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Sober.Api.Controllers.Base;
-using Sober.Application.Pages.Comments.Commands;
-using Sober.Application.Pages.Comments.Queries.Query;
 using Sober.Application.Pages.Skills.Commands;
 using Sober.Application.Pages.Skills.Queries.Query;
-using Sober.Contracts.Request.Comments;
 using Sober.Contracts.Request.Skills;
-using Sober.Contracts.Response.Comments;
 using Sober.Contracts.Response.Skills;
 
 namespace Sober.Api.Controllers
 {
-    [Route("[controller]")]
+    [Route("skill")]
     public class SkillController : ApiController
     {
         private readonly IMapper _mapper;
@@ -40,7 +36,7 @@ namespace Sober.Api.Controllers
         }
 
         [HttpGet]
-        [Route("get-all-skill")]
+        [Route("get-all-skills")]
         public async Task<IActionResult> GetAllSkills()
         {
             var query = new GetAllSkillQuery();

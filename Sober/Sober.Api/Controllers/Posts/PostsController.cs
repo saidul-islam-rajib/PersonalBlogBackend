@@ -9,7 +9,7 @@ using Sober.Contracts.Response.Posts;
 
 namespace Sober.Api.Controllers.Posts
 {
-    [Route("[controller]")]
+    [Route("post")]
     public class PostsController : ApiController
     {
         private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ namespace Sober.Api.Controllers.Posts
         }
 
         [HttpPost]
-        [Route("users/{userId}/posts")]
+        [Route("users/{userId}/create-new-post")]
         public async Task<IActionResult> CreatePostRequestAsync(PostRequest request, Guid userId)
         {
             var command = _mapper.Map<CreatePostCommand>((request, userId));
