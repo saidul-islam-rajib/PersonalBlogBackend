@@ -42,7 +42,13 @@ namespace Sober.Domain.Aggregates.PostAggregate
             List<PostSection> sections,
             List<PostTopic> topics)
         {
-            Post postResponse = new Post(PostId.CreateUnique(), userId, postTitle, postAbstract, sections, topics);
+            Post postResponse = new Post(
+                PostId.CreateUnique(),
+                userId,
+                postTitle,
+                postAbstract,
+                sections,
+                topics);
             return postResponse;
         }
 
