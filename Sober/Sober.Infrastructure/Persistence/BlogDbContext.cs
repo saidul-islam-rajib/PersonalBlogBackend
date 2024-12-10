@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sober.Domain.Aggregates.CommentAggregate;
+using Sober.Domain.Aggregates.EducationAggregate;
 using Sober.Domain.Aggregates.ExperienceAggregate;
 using Sober.Domain.Aggregates.PostAggregate;
 using Sober.Domain.Aggregates.SkillAggregate;
 using Sober.Domain.Entities;
-
 namespace Sober.Infrastructure.Persistence
 {
     public class BlogDbContext : DbContext
@@ -15,6 +15,7 @@ namespace Sober.Infrastructure.Persistence
         public DbSet<Comment> Comments { get; set; } = null!;
         public DbSet<Skill> Skills { get; set; } = null!;
         public DbSet<Experience> Experiences { get; set; } = null!;
+        public DbSet<Education> Educations { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
