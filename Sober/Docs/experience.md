@@ -30,23 +30,23 @@ class Experience
 
 #### EXPERIENCE REQUEST
 ```json
-POST /user/{:id}/experience
+POST /experience/user/{:userId}/create
+GET /experience/get-all-experience
+GET /experience/{:experienceId}
 ```
 ```json
 {
   "companyName": "ASA International Management Services Limited",
-  "companyLogo": "logo link will be here",
+  "shortName": "AMSL",
+  "companyLogo": "test logo link",
   "designation": "Junior Software Engineer",
-  "currentEmployee": false,
-  "startDate": "2024/12/04",
-  "endDate": "2024/12/04",
+  "isCurrentEmployee": true,
+  "startDate": "2024-12-10T10:19:16.685Z",
+  "endDate": "2024-12-10T10:19:16.685Z",
   "isFullTimeEmployee": true,
   "skills": [
     {
-      "skillId": "123e4567-e89b-12d3-a456-426614174000"
-    },
-    {      
-      "skillId": "123e4567-e89b-12d3-a456-426614174000"
+      "skillName": "Bangladesh Studies"
     }
   ]
 }
@@ -60,25 +60,23 @@ GET /experience/{:id}
 
 ```json
 {
-  "experienceId": "123e4567-e89b-12d3-a456-426614174000",
-  "companyName": "ASA International Management Services Limited",
-  "companyLogo": "logo link will be here",
-  "designation": "Junior Software Engineer",
-  "currentEmployee": "Current Employee",
-  "startDate": "2024/12/04",
-  "endDate": "2024/12/04",
-  "isFullTimeEmployee": "Full Time / Part Time",
-  "skills": [
-    {
-      "skillId": "123e4567-e89b-12d3-a456-426614174000",
-      "name": "Data structure & Algorithms"
-    },
-    {
-      "skillId": "123e4567-e89b-12d3-a456-426614174000",
-      "name": "Computer Networks"
-    }
-  ],
-  "createdDate": "2024/12/04",
-  "updatedDate": "2024/12/04"
+    "experienceId": "2e35486e-b587-4d27-b3de-08114b39b17e",
+    "userId": "065c14d5-04a0-489b-8931-e000261be27b",
+    "companyName": "ASA International Management Services Limited",
+    "shortName": "AMSL",
+    "companyLogo": "test logo link",
+    "designation": "Junior Software Engineer",
+    "isCurrentEmployee": true,
+    "startDate": "2024-12-10T10:19:16.685Z",
+    "endDate": "2024-12-10T10:19:16.685Z",
+    "isFullTimeEmployee": true,
+    "skills": [
+        {
+            "skillId": "f9ea3fb1-02cd-4f12-a8a6-8677f2e009ab",
+            "skillName": "Bangladesh Studies"
+        }
+    ],
+    "createdDate": "0001-01-01T00:00:00",
+    "updatedDate": "0001-01-01T00:00:00"
 }
 ```
