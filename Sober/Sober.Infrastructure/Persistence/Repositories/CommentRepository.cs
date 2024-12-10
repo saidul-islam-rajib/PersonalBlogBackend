@@ -2,7 +2,6 @@
 using Sober.Application.Interfaces;
 using Sober.Domain.Aggregates.CommentAggregate;
 using Sober.Domain.Aggregates.CommentAggregate.ValueObjects;
-using Sober.Domain.Aggregates.PostAggregate.ValueObjects;
 
 namespace Sober.Infrastructure.Persistence.Repositories
 {

@@ -37,6 +37,7 @@ namespace Sober.Infrastructure
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<ISkillRepository, SkillRepository>();
 
             return services;
         }
