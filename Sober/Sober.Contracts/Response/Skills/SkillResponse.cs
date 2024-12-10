@@ -1,4 +1,4 @@
 ﻿namespace Sober.Contracts.Response.Skills
 {
-    public record SkillResponse(Guid SkillId, string SkillName);
+    public record SkillResponse(string skillId, string skillName);
 }

@@ -3,15 +3,17 @@
 namespace Sober.Contracts.Response
 {
     public record ExperienceResponse(
-        Guid experienceId,
-        string companyName,
-        string companyLogo,
-        string designation,
-        bool isCurrentEmployee,
-        DateTime startDate,
-        DateTime endDate,
-        bool isFullTimeEmployee,
-        List<SkillResponse> skill,
-        DateTime createdDate,
-        DateTime updatedDate);
+        Guid ExperienceId,
+        string UserId,
+        string CompanyName,
+        string ShortName,
+        string CompanyLogo,
+        string Designation,
+        bool IsCurrentEmployee,
+        DateTime StartDate,
+        DateTime EndDate,
+        bool IsFullTimeEmployee,
+        List<SkillResponse> Skills,
+        DateTime CreatedDate,
+        DateTime UpdatedDate);
 }

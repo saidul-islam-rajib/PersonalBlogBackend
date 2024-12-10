@@ -19,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\Experiences - Copy\Commands\" />
+    <Folder Include="Pages\Experiences - Copy\Queries\" />
+    <Folder Include="Pages\Experiences\Queries\" />
     <Folder Include="Pages\Projects\Commands\" />
     <Folder Include="Pages\Projects\Queries\QueryHandler\" />
     <Folder Include="Pages\Projects\Queries\Query\" />
