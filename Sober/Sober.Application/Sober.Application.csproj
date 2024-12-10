@@ -18,4 +18,11 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Projects\Commands\" />
+    <Folder Include="Pages\Projects\Queries\QueryHandler\" />
+    <Folder Include="Pages\Projects\Queries\Query\" />
+    <Folder Include="Pages\Skills\Commands\" />
+  </ItemGroup>
+
 </Project>
