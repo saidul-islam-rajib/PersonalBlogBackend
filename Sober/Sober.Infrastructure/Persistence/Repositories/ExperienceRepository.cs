@@ -5,7 +5,7 @@ using Sober.Domain.Aggregates.ExperienceAggregate.ValueObjects;
 
 namespace Sober.Infrastructure.Persistence.Repositories
 {
-    internal class ExperienceRepository : IExperienceRepository
+    public class ExperienceRepository : IExperienceRepository
     {
         private readonly BlogDbContext _dbContext;
 
@@ -20,9 +20,16 @@ namespace Sober.Infrastructure.Persistence.Repositories
             _dbContext.SaveChanges();
         }
 
-        public bool DeleteExperience(Guid commentId)
+        public bool DeleteExperience(Guid id)
         {
-            throw new NotImplementedException();
+            var experience = _dbContext.Experiences.Find(new ExperienceId(id));
+            if (experience is null)
+            {
+                return false;
+            }
+            _dbContext.Experiences.Remove(experience);
+            _dbContext.SaveChanges();
+            return true;
         }
 
         public async Task<IEnumerable<Experience>> GetAllExperienceAsync()
@@ -31,7 +38,7 @@ namespace Sober.Infrastructure.Persistence.Repositories
             return response;
         }
 
-        public async Task<Experience> GetExperienceByIdAsync(Guid experienceId)
+        public async Task<Experience?> GetExperienceByIdAsync(Guid experienceId)
         {
             var response = await _dbContext.Experiences
                 .Include(experience => experience.Skills)
