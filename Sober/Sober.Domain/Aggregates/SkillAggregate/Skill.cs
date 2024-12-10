@@ -6,7 +6,7 @@ namespace Sober.Domain.Aggregates.SkillAggregate
     public sealed class Skill : AggregateRoot<SkillId>
     {
         public string SkillName { get; private set; } = null!;
-        private Skill(SkillId skillId, string skillName)
+        private Skill(SkillId skillId, string skillName) : base(skillId)
         {
             SkillName = skillName;
         }

@@ -2,8 +2,12 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Sober.Api.Controllers.Base;
+using Sober.Application.Pages.Comments.Commands;
 using Sober.Application.Pages.Comments.Queries.Query;
+using Sober.Application.Pages.Skills.Commands;
 using Sober.Application.Pages.Skills.Queries.Query;
+using Sober.Contracts.Request.Comments;
+using Sober.Contracts.Request.Skills;
 using Sober.Contracts.Response.Comments;
 using Sober.Contracts.Response.Skills;
 
@@ -19,6 +23,20 @@ namespace Sober.Api.Controllers
         {
             _mapper = mapper;
             _mediator = mediator;
+        }
+
+        [HttpPost]
+        [Route("create-new-skill")]
+        public async Task<IActionResult> CreateSkill(SkillRequest request)
+        {
+            var command = _mapper.Map<CreateSkillCommand>(request);
+            var result = await _mediator.Send(command);
+
+            var response = result.Match(
+                skill => Ok(_mapper.Map<SkillResponse>(skill)),
+                errors => Problem(errors));
+
+            return response;
         }
 
         [HttpGet]
