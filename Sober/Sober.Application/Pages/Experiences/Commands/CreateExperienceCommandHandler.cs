@@ -40,7 +40,6 @@ namespace Sober.Application.Pages.Experiences.Commands
                 experience.AddSkill(skill);
             }
 
-            // TO DO
             _repository.AddExperience(experience);
 
             return experience;
