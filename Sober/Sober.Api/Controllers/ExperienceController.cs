@@ -3,8 +3,10 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Sober.Api.Controllers.Base;
 using Sober.Application.Pages.Experiences.Commands;
+using Sober.Application.Pages.Experiences.Queries.Query;
 using Sober.Contracts.Request;
 using Sober.Contracts.Response;
+using Sober.Domain.Aggregates.ExperienceAggregate;
 
 namespace Sober.Api.Controllers
 {
@@ -32,6 +34,17 @@ namespace Sober.Api.Controllers
                 errors => Problem(errors));
 
             return response;
+        }
+
+        [HttpGet]
+        [Route("get-experiences")]
+        public async Task<IActionResult> GetExperiences()
+        {
+            var query = new GetExperienceQuery();
+            IEnumerable<Experience> experiences = await _mediator.Send(query);
+            var response = _mapper.Map<IEnumerable<ExperienceResponse>>(experiences);
+
+            return Ok(response);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Sober.Infrastructure.Persistence.Repositories
 
         public async Task<IEnumerable<Experience>> GetAllExperienceAsync()
         {
-            var response = await _dbContext.Experiences.AsNoTracking().ToListAsync();
+            var response = await _dbContext.Experiences.Include(x => x.Skills).ToListAsync();
             return response;
         }
 
