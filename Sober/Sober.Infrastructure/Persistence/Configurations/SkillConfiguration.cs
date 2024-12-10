@@ -16,9 +16,13 @@ namespace Sober.Infrastructure.Persistence.Configurations
         {
             builder.ToTable("Skills");
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).ValueGeneratedNever().HasColumnName("SkillId")
-                .HasConversion(id => id.Value, value => SkillId.Create(value));
-            builder.Property(x => x.SkillName).HasMaxLength(50);
+
+            builder.Property(x => x.Id)
+                .HasConversion(id => id.Value, value => SkillId.Create(value))
+                .ValueGeneratedNever()
+                .HasColumnName("SkillId");
+
+            builder.Property(x => x.SkillName).HasMaxLength(50).IsRequired();
 
         }
     }
