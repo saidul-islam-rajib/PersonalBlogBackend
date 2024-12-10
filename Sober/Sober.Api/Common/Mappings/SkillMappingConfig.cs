@@ -12,8 +12,8 @@ namespace Sober.Api.Common.Mappings
         {
             config.NewConfig<SkillRequest, CreateSkillCommand>();
             config.NewConfig<Skill, SkillResponse>()
-                .Map(dest => dest.SkillId, src => src.Id.Value)
-                .Map(dest => dest.SkillName, src => src.SkillName);
+                .Map(dest => dest.skillId, src => src.Id.Value)
+                .Map(dest => dest.skillName, src => src.SkillName);
         }
     }
 }
