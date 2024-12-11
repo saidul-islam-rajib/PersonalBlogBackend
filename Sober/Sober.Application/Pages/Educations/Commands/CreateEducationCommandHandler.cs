@@ -38,7 +38,7 @@ namespace Sober.Application.Pages.Educations.Commands
                 education.AddSkill(skill);
             }
 
-            //_educationRepository.AddEducation(education);
+            _educationRepository.AddEducation(education);
             return education;
         }
     }
