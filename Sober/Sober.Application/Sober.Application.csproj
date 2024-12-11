@@ -19,9 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\Bios\Commands\" />
+    <Folder Include="Pages\Bios\Queries\" />
     <Folder Include="Pages\ExperienceTest\Commands\" />
     <Folder Include="Pages\ExperienceTest\Queries\" />
-    <Folder Include="Pages\Educations\Queries\" />
     <Folder Include="Pages\Projects\Commands\" />
     <Folder Include="Pages\Projects\Queries\QueryHandler\" />
     <Folder Include="Pages\Projects\Queries\Query\" />
