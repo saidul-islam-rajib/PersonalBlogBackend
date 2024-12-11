@@ -2,6 +2,8 @@
 using Sober.Application.Interfaces;
 using Sober.Domain.Aggregates.CommentAggregate;
 using Sober.Domain.Aggregates.CommentAggregate.ValueObjects;
+using Sober.Domain.Aggregates.PostAggregate.ValueObjects;
+using System.ComponentModel.Design;
 
 namespace Sober.Infrastructure.Persistence.Repositories
 {
@@ -22,7 +24,16 @@ namespace Sober.Infrastructure.Persistence.Repositories
 
         public bool DeleteComment(Guid commentId)
         {
-            throw new NotImplementedException();
+            var comment = _dbContext.Comments.FirstOrDefault(c => c.Id.Equals(new CommentId(commentId)));
+            if (comment is null)
+            {
+                return false;
+            }
+
+            _dbContext.Comments.Remove(comment);
+            _dbContext.SaveChanges();
+
+            return true;
         }
 
         public async Task<IEnumerable<Comment>> GetAllCommentAsync()
@@ -34,6 +45,12 @@ namespace Sober.Infrastructure.Persistence.Repositories
         public async Task<Comment> GetCommentByIdAsync(Guid commentId)
         {
             var response = await _dbContext.Comments.FirstOrDefaultAsync(comment => comment.Id.Equals(new CommentId(commentId)));
+            return response;
+        }
+
+        public async Task<Comment> GetCommentByPostId(Guid postId)
+        {
+            var response = await _dbContext.Comments.FirstOrDefaultAsync(post => post.PostId.Equals(new PostId(postId)));
             return response;
         }
 

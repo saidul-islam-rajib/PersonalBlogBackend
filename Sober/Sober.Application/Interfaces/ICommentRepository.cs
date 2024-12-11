@@ -9,5 +9,6 @@ namespace Sober.Application.Interfaces
         Task<IEnumerable<Comment>> GetAllCommentAsync();
         Task<Comment> GetCommentByIdAsync(Guid commentId);
         Task<IEnumerable<Comment>> GetCommentByPostTitle(string postTitle);
+        Task<Comment> GetCommentByPostId(Guid postId);
     }
 }
