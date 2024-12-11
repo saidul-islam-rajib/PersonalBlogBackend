@@ -14,16 +14,16 @@ namespace Sober.Domain.Aggregates.EducationAggregate
         public DateTime StartDate { get ; private set; }
         public DateTime? EndDate { get; private set; }
         public UserId UserId { get; private set; }
-        public IReadOnlyCollection<Skill> Skills => _skills.AsReadOnly();
+        public ICollection<Skill> Skills => _skills;
 
         private Education(
             EducationId id,
             UserId userId,
             string instituteName,
-            string instituteLogo,
+            string? instituteLogo,
             string department,
             DateTime startDate,
-            DateTime endDate) : base(id)
+            DateTime? endDate) : base(id)
         {
             UserId = userId;
             InstituteName = instituteName;
@@ -36,10 +36,10 @@ namespace Sober.Domain.Aggregates.EducationAggregate
         public static Education Create(
             UserId userId,
             string instituteName,
-            string instituteLogo,
+            string? instituteLogo,
             string department,
             DateTime startDate,
-            DateTime endDate)
+            DateTime? endDate)
         {
             Education response = new Education(
                 EducationId.CreateUnique(),

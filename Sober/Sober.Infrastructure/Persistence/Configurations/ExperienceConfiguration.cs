@@ -13,7 +13,7 @@ namespace Sober.Infrastructure.Persistence.Configurations
         {
             ConfigureExperienceTable(builder);
         }
-
+                
         private void ConfigureExperienceTable(EntityTypeBuilder<Experience> builder)
         {
             builder.ToTable("Experiences");
@@ -38,13 +38,15 @@ namespace Sober.Infrastructure.Persistence.Configurations
                     value => UserId.Create(value))
                 .IsRequired();
 
+            // Many-to-many relationship with Skills
             builder
                 .HasMany(x => x.Skills)
                 .WithMany()
                 .UsingEntity<Dictionary<string, object>>(
                     "ExperienceSkills",
                     j => j.HasOne<Skill>().WithMany().HasForeignKey("SkillId"),
-                    j => j.HasOne<Experience>().WithMany().HasForeignKey("ExperienceId"));
+                    j => j.HasOne<Experience>().WithMany().HasForeignKey("ExperienceId")
+                );
         }
     }
 }
