@@ -11,6 +11,8 @@ namespace Sober.Domain.Aggregates.PostAggregate
         private readonly List<PostTopic> _topics = new();
         public string PostTitle { get; private set; } = null!;
         public string PostAbstract { get; private set; } = null!;
+        public string? Conclusion { get; private set; }
+        public int ReadingMinute { get; private set; }
         public ICollection<PostSection> Sections => _sections;
         public ICollection<PostTopic> TopicIds => _topics;
         public UserId UserId { get; private set; }
@@ -23,12 +25,16 @@ namespace Sober.Domain.Aggregates.PostAggregate
             UserId userId,
             string postTitle,
             string postAbstract,
+            string? conclusion,
+            int minutesRead,
             List<PostSection> sections,
             List<PostTopic> topics) : base(postId)
         {
             UserId = userId;
             PostTitle = postTitle;
             PostAbstract = postAbstract;
+            Conclusion = conclusion;
+            ReadingMinute = minutesRead;
             _sections = sections;
             _topics = topics;
             CreatedDateTime = DateTime.UtcNow;
@@ -39,6 +45,8 @@ namespace Sober.Domain.Aggregates.PostAggregate
             UserId userId,
             string postTitle,
             string postAbstract,
+            string? conclusion,
+            int readingMinutes,
             List<PostSection> sections,
             List<PostTopic> topics)
         {
@@ -47,6 +55,8 @@ namespace Sober.Domain.Aggregates.PostAggregate
                 userId,
                 postTitle,
                 postAbstract,
+                conclusion,
+                readingMinutes,
                 sections,
                 topics);
             return postResponse;

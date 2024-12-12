@@ -24,8 +24,10 @@ namespace Sober.Infrastructure.Persistence.Configurations
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id).ValueGeneratedNever().HasConversion(id => id.Value, value => PostId.Create(value));
-            builder.Property(x => x.PostTitle).HasMaxLength(100);
-            builder.Property(x => x.PostAbstract).HasMaxLength(500);
+            builder.Property(x => x.PostTitle).HasMaxLength(100).IsRequired();
+            builder.Property(x => x.PostAbstract).HasMaxLength(1000).IsRequired();
+            builder.Property(x => x.Conclusion).HasMaxLength(1000).IsRequired(false);
+            builder.Property(x => x.ReadingMinute).HasMaxLength(4).IsRequired();
             
             builder.Property(x => x.UserId).HasConversion(id => id.Value, value => UserId.Create(value));
         }
@@ -43,7 +45,7 @@ namespace Sober.Infrastructure.Persistence.Configurations
                   .HasColumnName("SectionId")                  
                   .HasConversion(id => id.Value, value => PostSectionId.Create(value));
                 sb.Property(s => s.SectionTitle).HasMaxLength(100);
-                sb.Property(s => s.SectionDescription).HasMaxLength(500);
+                sb.Property(s => s.SectionDescription).HasMaxLength(1000);
 
                 sb.OwnsMany(s => s.Items, ib =>
                 {
@@ -53,7 +55,7 @@ namespace Sober.Infrastructure.Persistence.Configurations
 
                     ib.Property(i => i.Id).ValueGeneratedNever().HasColumnName("PostItemId").HasConversion(id => id.Value, value => PostItemId.Create(value));
                     ib.Property(i => i.PostItemTitle).HasMaxLength(100);
-                    ib.Property(i => i.PostItemDescription).HasMaxLength(500);
+                    ib.Property(i => i.PostItemDescription).HasMaxLength(1000);
                 });
 
                 sb.Navigation(s => s.Items).Metadata.SetField("_items");

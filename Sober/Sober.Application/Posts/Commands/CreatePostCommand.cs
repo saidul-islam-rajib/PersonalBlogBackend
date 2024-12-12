@@ -8,6 +8,8 @@ namespace Sober.Application.Posts.Commands
         Guid UserId,
         string PostTitle,
         string PostAbstract,
+        string? Conclusion,
+        int ReadingMinute,
         List<PostSectionCommand> Sections,
         List<TopicCommand> Topics
         ) : IRequest<ErrorOr<Post>>;

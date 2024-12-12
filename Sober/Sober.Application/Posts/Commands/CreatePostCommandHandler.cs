@@ -25,6 +25,8 @@ namespace Sober.Application.Posts.Commands
                 userId: UserId.Create(request.UserId),
                 postTitle: request.PostTitle,
                 postAbstract: request.PostAbstract,
+                conclusion: request.Conclusion,
+                readingMinutes: request.ReadingMinute,
                 sections: request.Sections.ConvertAll(section => PostSection.Create(
                     section.SectionTitle,
                     section.SectionDescription,

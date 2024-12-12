@@ -3,6 +3,8 @@
     public record PostRequest(
         string PostTitle,
         string PostAbstract,
+        string Conclusion,
+        int ReadingMinute,
         List<PostSectionRequest> Sections,
         List<TopicRequest> Topics);
 

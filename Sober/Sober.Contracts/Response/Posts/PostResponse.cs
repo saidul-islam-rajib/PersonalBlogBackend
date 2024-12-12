@@ -4,6 +4,8 @@
         Guid PostId,
         string PostTitle,
         string PostAbstract,
+        string? Conclusion,
+        int ReadingMinute,
         List<PostSectionResponse> Sections,
         List<TopicResponse> TopicIds,
         string UserId,
