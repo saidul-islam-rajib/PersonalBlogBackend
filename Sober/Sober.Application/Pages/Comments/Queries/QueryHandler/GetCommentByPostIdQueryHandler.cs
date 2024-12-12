@@ -5,7 +5,7 @@ using Sober.Domain.Aggregates.CommentAggregate;
 
 namespace Sober.Application.Pages.Comments.Queries.QueryHandler
 {
-    public class GetCommentByPostIdQueryHandler : IRequestHandler<GetCommentByPostIdQuery, Comment>
+    public class GetCommentByPostIdQueryHandler : IRequestHandler<GetCommentByPostIdQuery, IEnumerable<Comment>>
     {
         private readonly ICommentRepository _commentRepository;
 
@@ -14,7 +14,7 @@ namespace Sober.Application.Pages.Comments.Queries.QueryHandler
             _commentRepository = commentRepository;
         }
 
-        public async Task<Comment> Handle(GetCommentByPostIdQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Comment>> Handle(GetCommentByPostIdQuery request, CancellationToken cancellationToken)
         {
             var response = await _commentRepository.GetCommentByPostId(request.postId);
             return response;

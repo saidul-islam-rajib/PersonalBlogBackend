@@ -90,7 +90,7 @@ namespace Sober.Api.Controllers.Comments
             {
                 return NotFound(postId);
             }
-            var response = _mapper.Map<Comment>(comment);
+            var response = _mapper.Map<List<Comment>>(comment);
             return Ok(response);
         }
     }

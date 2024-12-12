@@ -4,6 +4,7 @@ using Sober.Domain.Aggregates.CommentAggregate;
 using Sober.Domain.Aggregates.CommentAggregate.ValueObjects;
 using Sober.Domain.Aggregates.PostAggregate.ValueObjects;
 using System.ComponentModel.Design;
+using System.Linq;
 
 namespace Sober.Infrastructure.Persistence.Repositories
 {
@@ -48,10 +49,14 @@ namespace Sober.Infrastructure.Persistence.Repositories
             return response;
         }
 
-        public async Task<Comment> GetCommentByPostId(Guid postId)
+        public async Task<IEnumerable<Comment>> GetCommentByPostId(Guid postId)
         {
-            var response = await _dbContext.Comments.FirstOrDefaultAsync(post => post.PostId.Equals(new PostId(postId)));
-            return response;
+            // TO DO: performance related issue will raise here if `comments` list are huge
+            string postIdData = postId.ToString();
+            var response = await _dbContext.Comments.ToListAsync();
+            IEnumerable<Comment> filteredComments = response.Where(comment => comment.PostId.Value == postId);
+
+            return filteredComments;
         }
 
         public async Task<IEnumerable<Comment>> GetCommentByPostTitle(string postTitle)
