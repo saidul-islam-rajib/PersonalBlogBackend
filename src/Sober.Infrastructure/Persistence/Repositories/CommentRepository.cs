@@ -39,7 +39,7 @@ namespace Sober.Infrastructure.Persistence.Repositories
 
         public async Task<IEnumerable<Comment>> GetAllCommentAsync()
         {
-            var response = await _dbContext.Comments.AsNoTracking().ToListAsync();
+            var response = await _dbContext.Comments.AsNoTracking().OrderByDescending(comment => comment.Date).ToListAsync();
             return response;
         }
 
@@ -54,7 +54,7 @@ namespace Sober.Infrastructure.Persistence.Repositories
             // TO DO: performance related issue will raise here if `comments` list are huge
             string postIdData = postId.ToString();
             var response = await _dbContext.Comments.ToListAsync();
-            IEnumerable<Comment> filteredComments = response.Where(comment => comment.PostId.Value == postId);
+            IEnumerable<Comment> filteredComments = response.Where(comment => comment.PostId.Value == postId).OrderByDescending(comment => comment.Date);
 
             return filteredComments;
         }
