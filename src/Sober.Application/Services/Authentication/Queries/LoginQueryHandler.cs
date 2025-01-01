@@ -3,8 +3,9 @@ using MediatR;
 using Sober.Application.Common.Interfaces.Authentication;
 using Sober.Application.Common.Interfaces.Persistence;
 using Sober.Application.Services.Authentication.Common;
+using Sober.Domain.Aggregates.UserAggregate;
+using Sober.Domain.Aggregates.UserAggregate.ValueObjects;
 using Sober.Domain.Common.Errors;
-using Sober.Domain.Entities;
 
 namespace Sober.Application.Services.Authentication.Queries
 {
@@ -38,7 +39,7 @@ namespace Sober.Application.Services.Authentication.Queries
             }
 
             // 3. Create JWT token
-            var userId = Guid.NewGuid();
+            var userId = UserId.CreateUnique();
             var token = _jwtTokenGenerator.GenerateToken(user);
             return new AuthenticationResult(
                 user,

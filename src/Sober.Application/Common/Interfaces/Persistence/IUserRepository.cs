@@ -1,4 +1,4 @@
-﻿using Sober.Domain.Entities;
+﻿using Sober.Domain.Aggregates.UserAggregate;
 
 namespace Sober.Application.Common.Interfaces.Persistence
 {

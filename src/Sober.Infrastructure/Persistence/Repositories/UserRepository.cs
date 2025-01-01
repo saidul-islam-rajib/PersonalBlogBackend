@@ -1,5 +1,5 @@
 ﻿using Sober.Application.Common.Interfaces.Persistence;
-using Sober.Domain.Entities;
+using Sober.Domain.Aggregates.UserAggregate;
 
 namespace Sober.Infrastructure.Persistence.Repositories
 {

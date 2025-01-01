@@ -3,8 +3,9 @@ using MediatR;
 using Sober.Application.Common.Interfaces.Authentication;
 using Sober.Application.Common.Interfaces.Persistence;
 using Sober.Application.Services.Authentication.Common;
+using Sober.Domain.Aggregates.UserAggregate;
+using Sober.Domain.Aggregates.UserAggregate.ValueObjects;
 using Sober.Domain.Common.Errors;
-using Sober.Domain.Entities;
 
 namespace Sober.Application.Services.Authentication.Commands
 {
@@ -32,13 +33,22 @@ namespace Sober.Application.Services.Authentication.Commands
             }
 
             // 2. Create user (generate unique ID) & persist to DB
-            var user = new User
-            {
-                FirstName = command.FirstName,
-                LastName = command.LastName,
-                Email = command.Email,
-                Password = command.Password
-            };
+            //var user = new User
+            //{
+            //    FirstName = command.FirstName,
+            //    LastName = command.LastName,
+            //    Email = command.Email,
+            //    Password = command.Password
+            //};
+
+            var user = User.Create(
+                    command.FirstName,
+                    command.LastName,
+                    command.Email,
+                    command.Password
+                );
+
+
             _userRepository.Add(user);
 
             // 3. Generate token

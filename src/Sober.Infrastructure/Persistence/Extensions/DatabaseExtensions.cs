@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Sober.Domain.Aggregates.UserAggregate.ValueObjects;
 
 namespace Sober.Infrastructure.Persistence.Extensions;
 
@@ -17,7 +18,11 @@ public static class DatabaseExtensions
 
     private static async Task SeedDataAsync(BlogDbContext context)
     {
-        await SeedUserAsync(context);
+        if (!await context.Users.AnyAsync())
+        {
+            await SeedUserAsync(context);
+        }
+            
         //await SeedTopicAsync(context);
         //await SeedSkillAsync(context);
         //await SeedSectionAsync(context);
@@ -28,13 +33,13 @@ public static class DatabaseExtensions
         //await SeedCommentAsync(context);
     }
 
-    private static async Task SeedUserAsync(BlogDbContext context)
+    private static async Task<UserId> SeedUserAsync(BlogDbContext context)
     {
-        if(!await context.Users.AnyAsync())
-        {
-            await context.Users.AddRangeAsync(InitialData.CreateUserAsync());
-            await context.SaveChangesAsync();
-        }
+        var user = InitialData.CreateUserAsync();
+        await context.Users.AddRangeAsync();
+        await context.SaveChangesAsync();
+
+        return user.Id;
     }
 
     private static async Task SeedTopicAsync(BlogDbContext context)

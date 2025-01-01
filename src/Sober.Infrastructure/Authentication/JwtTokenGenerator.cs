@@ -2,7 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using Sober.Application.Common.Interfaces.Authentication;
 using Sober.Application.Common.Interfaces.Services;
-using Sober.Domain.Entities;
+using Sober.Domain.Aggregates.UserAggregate;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -32,7 +32,7 @@ namespace Sober.Infrastructure.Authentication
 
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()!),
                 new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
                 new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())

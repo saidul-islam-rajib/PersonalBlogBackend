@@ -1,14 +1,16 @@
-﻿namespace Sober.Domain.Entities
+﻿using Sober.Domain.Aggregates.UserAggregate.ValueObjects;
+
+namespace Sober.Domain.Entities
 {
     public record User
     {
-        public Guid Id { get; init; } = Guid.NewGuid();
+        public UserId Id { get; init; } = UserId.CreateUnique();
         public string FirstName { get; init; } = null!;
         public string LastName { get; init; } = null!;
         public string Email { get; init; } = null!;
         public string Password { get; init; } = null!;
 
-        private User(Guid id, string firstName, string lastName, string email, string password)
+        private User(UserId id, string firstName, string lastName, string email, string password)
         {
             Id = id;
             FirstName = firstName;
@@ -19,7 +21,7 @@
 
         public static User Create(string firstName, string lastName, string email, string password)
         {
-            var user = new User(Guid.NewGuid(), firstName, lastName, email, password);
+            var user = new User(UserId.CreateUnique(), firstName, lastName, email, password);
             return user;                        
         }
 

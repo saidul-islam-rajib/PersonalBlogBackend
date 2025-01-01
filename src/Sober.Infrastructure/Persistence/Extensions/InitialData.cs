@@ -1,7 +1,7 @@
 ﻿using Sober.Domain.Aggregates.PostAggregate;
 using Sober.Domain.Aggregates.PostAggregate.Entities;
+using Sober.Domain.Aggregates.UserAggregate;
 using Sober.Domain.Aggregates.UserAggregate.ValueObjects;
-using Sober.Domain.Entities;
 
 namespace Sober.Infrastructure.Persistence.Extensions;
 

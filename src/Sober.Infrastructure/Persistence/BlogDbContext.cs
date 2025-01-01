@@ -4,7 +4,7 @@ using Sober.Domain.Aggregates.EducationAggregate;
 using Sober.Domain.Aggregates.ExperienceAggregate;
 using Sober.Domain.Aggregates.PostAggregate;
 using Sober.Domain.Aggregates.SkillAggregate;
-using Sober.Domain.Entities;
+using Sober.Domain.Aggregates.UserAggregate;
 namespace Sober.Infrastructure.Persistence
 {
     public class BlogDbContext : DbContext
