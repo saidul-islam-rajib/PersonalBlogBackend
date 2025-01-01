@@ -1,6 +1,7 @@
 using Sober.Api;
 using Sober.Application;
 using Sober.Infrastructure;
+using Sober.Infrastructure.Persistence.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -38,4 +39,10 @@ app.UseCors("Rajib");
 app.UseExceptionHandler("/error");
 app.UseHttpsRedirection();
 app.MapControllers();
+
+if (app.Environment.IsDevelopment())
+{
+    await app.InitialiseDatabaseAsync();
+}
+
 app.Run();
