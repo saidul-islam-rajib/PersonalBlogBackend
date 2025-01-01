@@ -1,11 +1,23 @@
 ﻿using Sober.Domain.Aggregates.PostAggregate;
 using Sober.Domain.Aggregates.PostAggregate.Entities;
 using Sober.Domain.Aggregates.UserAggregate.ValueObjects;
+using Sober.Domain.Entities;
 
 namespace Sober.Infrastructure.Persistence.Extensions;
 
 internal class InitialData
 {
+    public static User CreateUserAsync()
+    {
+        var user = User.Create(
+            "Saidul Islam",
+            "Rajib",
+            "saidul.is.rajib@gmail.com",
+            "Test@123"
+        );
+        return user;
+    }
+
     public static List<Post> GetSeedData()
     {
 
