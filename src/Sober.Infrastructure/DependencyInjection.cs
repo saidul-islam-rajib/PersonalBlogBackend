@@ -22,17 +22,18 @@ namespace Sober.Infrastructure
         {
             services
                 .AddAuth(configuration)
-                .AddPersistance();
+                .AddPersistance(configuration);
 
             services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
             return services;
         }
 
         public static IServiceCollection AddPersistance(
-            this IServiceCollection services)
+            this IServiceCollection services, ConfigurationManager configuration)
         {
+            var connectionString = configuration.GetConnectionString("Database");
             services.AddDbContext<BlogDbContext>(options =>
-                options.UseSqlServer("Data Source=SAIDUL-INTERN;Initial Catalog=PersonalBlogDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"));
+                options.UseSqlServer(connectionString));
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPostRepository, PostRepository>();

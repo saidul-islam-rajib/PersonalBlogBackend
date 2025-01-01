@@ -1,0 +1,8 @@
+services:
+  blogdb:
+    container_name: blogdb
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Test@123
+    ports:
+      - "1433:1433"
