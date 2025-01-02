@@ -35,7 +35,7 @@ public static class DatabaseExtensions
 
         if(!await context.Posts.AnyAsync())
         {
-            postId = await SeedPostAsync(context);
+            postId = await SeedPostAsync(context, userId);
         }
 
         //await SeedExperienceAsync(context);
@@ -94,9 +94,9 @@ public static class DatabaseExtensions
         await context.SaveChangesAsync();
     }
 
-    private static async Task<PostId> SeedPostAsync(BlogDbContext context)
+    private static async Task<PostId> SeedPostAsync(BlogDbContext context, UserId userId)
     {
-        List<Post> posts = InitialData.CreatePostAsync();
+        List<Post> posts = InitialData.CreatePostAsync(userId);
         await context.Posts.AddRangeAsync(posts);
         await context.SaveChangesAsync();
 

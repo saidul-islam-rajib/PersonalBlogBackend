@@ -39,13 +39,13 @@ internal class InitialData
         return user;
     }
 
-    public static List<Post> CreatePostAsync()
+    public static List<Post> CreatePostAsync(UserId userId)
     {
 
         var posts =  new List<Post>
             {
                 Post.Create(
-                    UserId.Create(Guid.NewGuid()),
+                    userId,
                     "POST TITLE 1",
                     "This is post abstraction",
                     "this is all about conclusions.",
