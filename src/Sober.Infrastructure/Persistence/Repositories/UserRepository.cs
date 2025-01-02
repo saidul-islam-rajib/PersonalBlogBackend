@@ -1,4 +1,5 @@
-﻿using Sober.Application.Common.Interfaces.Persistence;
+﻿using Microsoft.EntityFrameworkCore;
+using Sober.Application.Common.Interfaces.Persistence;
 using Sober.Domain.Aggregates.UserAggregate;
 
 namespace Sober.Infrastructure.Persistence.Repositories
@@ -25,6 +26,12 @@ namespace Sober.Infrastructure.Persistence.Repositories
             //return _users.SingleOrDefault(x => x.Email == email);
             var response = _dbContext.Users.SingleOrDefault(x => x.Email == email);
             return response;
+        }
+
+        public Task<User> GetDefaultUser()
+        {
+            var user = _dbContext.Users.FirstOrDefaultAsync();
+            return user;
         }
     }
 }
