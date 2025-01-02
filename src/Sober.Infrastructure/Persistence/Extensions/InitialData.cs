@@ -2,6 +2,7 @@
 using Sober.Domain.Aggregates.PostAggregate;
 using Sober.Domain.Aggregates.PostAggregate.Entities;
 using Sober.Domain.Aggregates.PostAggregate.ValueObjects;
+using Sober.Domain.Aggregates.SkillAggregate;
 using Sober.Domain.Aggregates.UserAggregate;
 using Sober.Domain.Aggregates.UserAggregate.ValueObjects;
 
@@ -9,6 +10,18 @@ namespace Sober.Infrastructure.Persistence.Extensions;
 
 internal class InitialData
 {
+
+    public static List<Skill> CreateSkillAsync()
+    {
+        var skills = new List<Skill>
+        {
+            Skill.Create("Data Structure & Algorithms"),
+            Skill.Create("Computer Networks"),
+            Skill.Create("Operating System"),
+        };
+        return skills;
+    }
+
     public static List<Comment> CreateCommentAsync(PostId postId)
     {
         var comments = new List<Comment>

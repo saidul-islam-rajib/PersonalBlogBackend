@@ -29,7 +29,12 @@ public static class DatabaseExtensions
         }
 
         //await SeedTopicAsync(context);
-        //await SeedSkillAsync(context);
+
+        if(!await context.Skills.AnyAsync())
+        {
+            await SeedSkillAsync(context);
+        }
+
         //await SeedSectionAsync(context);
         //await SeedPostItemAsync(context);
 
@@ -64,7 +69,9 @@ public static class DatabaseExtensions
 
     private static async Task SeedSkillAsync(BlogDbContext context)
     {
-        throw new NotImplementedException();
+        var skills = InitialData.CreateSkillAsync();
+        await context.Skills.AddRangeAsync(skills);
+        await context.SaveChangesAsync();
     }
 
     private static async Task SeedSectionAsync(BlogDbContext context)
