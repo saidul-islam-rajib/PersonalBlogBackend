@@ -29,7 +29,12 @@ namespace Sober.Domain.Aggregates.UserAggregate
             string email,
             string password)
         {
-            User user = new User(UserId.CreateUnique(), firstName, lastName, email, password);
+            User user = new User(
+                UserId.CreateUnique(),
+                firstName,
+                lastName,
+                email,
+                password);
             return user;
         }
 

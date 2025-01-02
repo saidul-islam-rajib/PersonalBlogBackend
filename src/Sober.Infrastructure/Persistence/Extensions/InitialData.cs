@@ -21,7 +21,7 @@ internal class InitialData
     public static List<Post> GetSeedData()
     {
 
-        return new List<Post>
+        var posts =  new List<Post>
             {
                 Post.Create(
                     UserId.Create(Guid.NewGuid()),
@@ -58,5 +58,7 @@ internal class InitialData
                     }
                 )
             };
+
+        return posts;
     }
 }

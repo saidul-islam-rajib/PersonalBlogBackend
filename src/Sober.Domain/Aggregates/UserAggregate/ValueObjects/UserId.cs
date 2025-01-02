@@ -11,7 +11,8 @@ namespace Sober.Domain.Aggregates.UserAggregate.ValueObjects
         }
         public static UserId CreateUnique()
         {
-            return new UserId(Guid.NewGuid());
+            UserId userId = new UserId(Guid.NewGuid());
+            return userId;
         }
 
         public static UserId Create(Guid value)

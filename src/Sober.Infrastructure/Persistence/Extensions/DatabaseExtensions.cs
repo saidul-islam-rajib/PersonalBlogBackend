@@ -20,14 +20,14 @@ public static class DatabaseExtensions
     {
         if (!await context.Users.AnyAsync())
         {
-            await SeedUserAsync(context);
+            var response = await SeedUserAsync(context);
         }
-            
+
         //await SeedTopicAsync(context);
         //await SeedSkillAsync(context);
         //await SeedSectionAsync(context);
         //await SeedPostItemAsync(context);
-        //await SeedPostAsync(context);
+        await SeedPostAsync(context);
         //await SeedExperienceAsync(context);
         //await SeedEducationAsync(context);
         //await SeedCommentAsync(context);
