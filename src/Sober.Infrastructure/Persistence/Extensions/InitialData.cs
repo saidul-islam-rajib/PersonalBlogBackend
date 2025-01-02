@@ -1,5 +1,7 @@
-﻿using Sober.Domain.Aggregates.PostAggregate;
+﻿using Sober.Domain.Aggregates.CommentAggregate;
+using Sober.Domain.Aggregates.PostAggregate;
 using Sober.Domain.Aggregates.PostAggregate.Entities;
+using Sober.Domain.Aggregates.PostAggregate.ValueObjects;
 using Sober.Domain.Aggregates.UserAggregate;
 using Sober.Domain.Aggregates.UserAggregate.ValueObjects;
 
@@ -7,6 +9,25 @@ namespace Sober.Infrastructure.Persistence.Extensions;
 
 internal class InitialData
 {
+    public static List<Comment> CreateCommentAsync(PostId postId)
+    {
+        var comments = new List<Comment>
+        {
+            Comment.Create(
+                postId,
+                "Sajib Ahmed",
+                "This is one of the best project...",
+                "Post Title 1"),
+
+            Comment.Create(
+                postId,
+                "Rakib Ahmed",
+                "This is one of the best project...",
+                "Post Title 2")
+        };
+        return comments;
+    }
+
     public static User CreateUserAsync()
     {
         var user = User.Create(
@@ -18,7 +39,7 @@ internal class InitialData
         return user;
     }
 
-    public static List<Post> GetSeedData()
+    public static List<Post> CreatePostAsync()
     {
 
         var posts =  new List<Post>

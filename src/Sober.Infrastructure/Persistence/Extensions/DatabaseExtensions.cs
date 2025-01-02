@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Sober.Domain.Aggregates.PostAggregate;
+using Sober.Domain.Aggregates.PostAggregate.ValueObjects;
 using Sober.Domain.Aggregates.UserAggregate.ValueObjects;
 
 namespace Sober.Infrastructure.Persistence.Extensions;
@@ -18,25 +20,38 @@ public static class DatabaseExtensions
 
     private static async Task SeedDataAsync(BlogDbContext context)
     {
+        var userId = UserId.CreateUnique();
+        var postId = PostId.CreateUnique();
+
         if (!await context.Users.AnyAsync())
         {
-            var response = await SeedUserAsync(context);
+            userId = await SeedUserAsync(context);
         }
 
         //await SeedTopicAsync(context);
         //await SeedSkillAsync(context);
         //await SeedSectionAsync(context);
         //await SeedPostItemAsync(context);
-        await SeedPostAsync(context);
+
+        if(!await context.Posts.AnyAsync())
+        {
+            postId = await SeedPostAsync(context);
+        }
+
         //await SeedExperienceAsync(context);
         //await SeedEducationAsync(context);
-        //await SeedCommentAsync(context);
+
+        if (!await context.Comments.AnyAsync())
+        {
+            await SeedCommentAsync(context, postId);
+        }
+
     }
 
     private static async Task<UserId> SeedUserAsync(BlogDbContext context)
     {
         var user = InitialData.CreateUserAsync();
-        await context.Users.AddRangeAsync();
+        await context.Users.AddRangeAsync(user);
         await context.SaveChangesAsync();
 
         return user.Id;
@@ -72,18 +87,19 @@ public static class DatabaseExtensions
         throw new NotImplementedException();
     }
 
-    private static async Task SeedCommentAsync(BlogDbContext context)
+    private static async Task SeedCommentAsync(BlogDbContext context, PostId postId)
     {
-        throw new NotImplementedException();
+        var comments = InitialData.CreateCommentAsync(postId);
+        await context.Comments.AddRangeAsync(comments);
+        await context.SaveChangesAsync();
     }
 
-    private static async Task SeedPostAsync(BlogDbContext context)
+    private static async Task<PostId> SeedPostAsync(BlogDbContext context)
     {
-        if(!await context.Posts.AnyAsync())
-        {
-            var response = InitialData.GetSeedData();
-            await context.Posts.AddRangeAsync(response);
-            await context.SaveChangesAsync();
-        }
+        List<Post> posts = InitialData.CreatePostAsync();
+        await context.Posts.AddRangeAsync(posts);
+        await context.SaveChangesAsync();
+
+        return posts[0].Id;
     }
 }

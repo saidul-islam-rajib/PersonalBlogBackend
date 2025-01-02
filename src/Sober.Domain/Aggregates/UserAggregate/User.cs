@@ -15,7 +15,7 @@ namespace Sober.Domain.Aggregates.UserAggregate
             string firstName,
             string lastName,
             string email,
-            string password)
+            string password) : base(userId)
         {
             FirstName = firstName;
             LastName = lastName;
