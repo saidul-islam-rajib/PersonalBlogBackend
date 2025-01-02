@@ -38,7 +38,11 @@ public static class DatabaseExtensions
             postId = await SeedPostAsync(context, userId);
         }
 
-        //await SeedExperienceAsync(context);
+        if(!await context.Experiences.AnyAsync())
+        {
+            await SeedExperienceAsync(context, userId);
+        }
+
         //await SeedEducationAsync(context);
 
         if (!await context.Comments.AnyAsync())
@@ -57,11 +61,6 @@ public static class DatabaseExtensions
         return user.Id;
     }
 
-    private static async Task SeedTopicAsync(BlogDbContext context)
-    {
-        throw new NotImplementedException();
-    }
-
     private static async Task SeedSkillAsync(BlogDbContext context)
     {
         var skills = InitialData.CreateSkillAsync();
@@ -69,19 +68,12 @@ public static class DatabaseExtensions
         await context.SaveChangesAsync();
     }
 
-    private static async Task SeedSectionAsync(BlogDbContext context)
-    {
-        throw new NotImplementedException();
-    }
 
-    private static async Task SeedPostItemAsync(BlogDbContext context)
+    private static async Task SeedExperienceAsync(BlogDbContext context, UserId userId)
     {
-        throw new NotImplementedException();
-    }
-
-    private static async Task SeedExperienceAsync(BlogDbContext context)
-    {
-        throw new NotImplementedException();
+        var experiences = InitialData.CreateExperienceAsync(userId);
+        await context.Experiences.AddRangeAsync(experiences);
+        await context.SaveChangesAsync();
     }
 
     private static async Task SeedEducationAsync(BlogDbContext context)

@@ -1,15 +1,46 @@
 ﻿using Sober.Domain.Aggregates.CommentAggregate;
+using Sober.Domain.Aggregates.ExperienceAggregate;
 using Sober.Domain.Aggregates.PostAggregate;
 using Sober.Domain.Aggregates.PostAggregate.Entities;
 using Sober.Domain.Aggregates.PostAggregate.ValueObjects;
 using Sober.Domain.Aggregates.SkillAggregate;
 using Sober.Domain.Aggregates.UserAggregate;
 using Sober.Domain.Aggregates.UserAggregate.ValueObjects;
+using System.Security.Cryptography.Xml;
 
 namespace Sober.Infrastructure.Persistence.Extensions;
 
 internal class InitialData
 {
+    public static List<Experience> CreateExperienceAsync(UserId userId)
+    {
+        var experiences = new List<Experience>
+        {
+            Experience.Create(
+                userId,
+                "ASA International Management Services Limited",
+                "AMSL",
+                "amsl.png",
+                "Intern Software Engineer",
+                false,
+                new DateTime(2022, 10, 10),
+                new DateTime(2023, 01, 10),
+                true),
+
+            Experience.Create(
+                userId,
+                "ASA International Management Services Limited",
+                "AMSL",
+                "amsl.png",
+                "Junior Software Engineer",
+                true,
+                new DateTime(2022, 10, 11),
+                new DateTime(2025, 01, 02),
+                true)
+        };
+
+        return experiences;
+    }
 
     public static List<Skill> CreateSkillAsync()
     {
