@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Sober.Domain.Aggregates.PostAggregate;
 using Sober.Domain.Aggregates.PostAggregate.Entities;
 using Sober.Domain.Aggregates.PostAggregate.ValueObjects;
+using Sober.Domain.Aggregates.UserAggregate;
 using Sober.Domain.Aggregates.UserAggregate.ValueObjects;
 
 namespace Sober.Infrastructure.Persistence.Configurations
@@ -29,7 +30,8 @@ namespace Sober.Infrastructure.Persistence.Configurations
             builder.Property(x => x.Conclusion).HasMaxLength(1000).IsRequired(false);
             builder.Property(x => x.ReadingMinute).HasMaxLength(4).IsRequired();
             
-            builder.Property(x => x.UserId).HasConversion(id => id.Value, value => UserId.Create(value));
+            builder.Property(x => x.UserId).HasConversion(id => id.Value, value => UserId.Create(value)).IsRequired();
+            builder.HasOne<User>().WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
         }
 
         private void ConfigurePostSectionTable(EntityTypeBuilder<Post> builder)
