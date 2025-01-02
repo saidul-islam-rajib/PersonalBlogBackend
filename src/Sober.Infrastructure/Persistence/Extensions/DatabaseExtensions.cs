@@ -28,15 +28,10 @@ public static class DatabaseExtensions
             userId = await SeedUserAsync(context);
         }
 
-        //await SeedTopicAsync(context);
-
         if(!await context.Skills.AnyAsync())
         {
             await SeedSkillAsync(context);
         }
-
-        //await SeedSectionAsync(context);
-        //await SeedPostItemAsync(context);
 
         if(!await context.Posts.AnyAsync())
         {
