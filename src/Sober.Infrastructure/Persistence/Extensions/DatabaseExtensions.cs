@@ -43,7 +43,10 @@ public static class DatabaseExtensions
             await SeedExperienceAsync(context, userId);
         }
 
-        //await SeedEducationAsync(context);
+        if(!await context.Educations.AnyAsync())
+        {
+            await SeedEducationAsync(context, userId);
+        }
 
         if (!await context.Comments.AnyAsync())
         {
@@ -76,9 +79,11 @@ public static class DatabaseExtensions
         await context.SaveChangesAsync();
     }
 
-    private static async Task SeedEducationAsync(BlogDbContext context)
+    private static async Task SeedEducationAsync(BlogDbContext context, UserId userId)
     {
-        throw new NotImplementedException();
+        var educations = InitialData.CreateEducationAsync(userId);
+        await context.Educations.AddRangeAsync(educations);
+        await context.SaveChangesAsync();
     }
 
     private static async Task SeedCommentAsync(BlogDbContext context, PostId postId)

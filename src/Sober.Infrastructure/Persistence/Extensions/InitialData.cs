@@ -1,4 +1,5 @@
 ﻿using Sober.Domain.Aggregates.CommentAggregate;
+using Sober.Domain.Aggregates.EducationAggregate;
 using Sober.Domain.Aggregates.ExperienceAggregate;
 using Sober.Domain.Aggregates.PostAggregate;
 using Sober.Domain.Aggregates.PostAggregate.Entities;
@@ -6,12 +7,27 @@ using Sober.Domain.Aggregates.PostAggregate.ValueObjects;
 using Sober.Domain.Aggregates.SkillAggregate;
 using Sober.Domain.Aggregates.UserAggregate;
 using Sober.Domain.Aggregates.UserAggregate.ValueObjects;
-using System.Security.Cryptography.Xml;
 
 namespace Sober.Infrastructure.Persistence.Extensions;
 
 internal class InitialData
 {
+    public static List<Education> CreateEducationAsync(UserId userId)
+    {
+        var educations = new List<Education>
+        {
+            Education.Create(
+                userId,
+                "Daffodil International University",
+                "diu.png",
+                "Computer Science & Engineering",
+                new DateTime(2018, 01, 01),
+                new DateTime(2022, 02, 22)
+            )
+        };
+
+        return educations;
+    }
     public static List<Experience> CreateExperienceAsync(UserId userId)
     {
         var experiences = new List<Experience>
