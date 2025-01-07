@@ -1,6 +1,7 @@
 ﻿using Sober.Domain.Aggregates.CommentAggregate;
 using Sober.Domain.Aggregates.EducationAggregate;
 using Sober.Domain.Aggregates.ExperienceAggregate;
+using Sober.Domain.Aggregates.ExperienceAggregate.Entities;
 using Sober.Domain.Aggregates.PostAggregate;
 using Sober.Domain.Aggregates.PostAggregate.Entities;
 using Sober.Domain.Aggregates.PostAggregate.ValueObjects;
@@ -39,9 +40,13 @@ internal class InitialData
                 "amsl.png",
                 "Intern Software Engineer",
                 false,
+                true,
+                new List<ExperienceSection>
+                {
+                    ExperienceSection.Create("Improved application performance around 30%")
+                },
                 new DateTime(2022, 10, 10),
-                new DateTime(2023, 01, 10),
-                true),
+                new DateTime(2023, 01, 10)),
 
             Experience.Create(
                 userId,
@@ -50,9 +55,13 @@ internal class InitialData
                 "amsl.png",
                 "Junior Software Engineer",
                 true,
+                true,
+                new List<ExperienceSection>
+                {
+                    ExperienceSection.Create("Improved application performance around 30%")
+                },
                 new DateTime(2023, 01, 11),
-                new DateTime(2025, 01, 02),
-                true)
+                new DateTime(2025, 01, 02))
         };
 
         return experiences;

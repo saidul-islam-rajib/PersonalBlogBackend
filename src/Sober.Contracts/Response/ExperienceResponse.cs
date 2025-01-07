@@ -1,6 +1,4 @@
-﻿using Sober.Contracts.Response.Skills;
-
-namespace Sober.Contracts.Response
+﻿namespace Sober.Contracts.Response
 {
     public record ExperienceResponse(
         Guid ExperienceId,
@@ -13,7 +11,9 @@ namespace Sober.Contracts.Response
         DateTime StartDate,
         DateTime EndDate,
         bool IsFullTimeEmployee,
-        List<SkillResponse> Skills,
+        List<ExperienceSectionResponse> ExperienceSection,
         DateTime CreatedDate,
         DateTime UpdatedDate);
+
+    public record ExperienceSectionResponse(string ExperienceSectionId, string SectionDescription);
 }

@@ -15,5 +15,7 @@ namespace Sober.Application.Pages.Experiences.Commands
         DateTime StartDate,
         DateTime EndDate,
         bool IsFullTimeEmployee,
-        List<CreateSkillCommand> Skills) : IRequest<ErrorOr<Experience>>;
+        List<ExperienceSectionCommand> ExperienceSection) : IRequest<ErrorOr<Experience>>;
+
+    public record ExperienceSectionCommand(string sectionDescription);
 }

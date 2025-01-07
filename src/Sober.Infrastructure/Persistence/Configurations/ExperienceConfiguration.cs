@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Sober.Domain.Aggregates.ExperienceAggregate;
 using Sober.Domain.Aggregates.ExperienceAggregate.ValueObjects;
-using Sober.Domain.Aggregates.SkillAggregate;
 using Sober.Domain.Aggregates.UserAggregate.ValueObjects;
 
 namespace Sober.Infrastructure.Persistence.Configurations
@@ -12,8 +11,11 @@ namespace Sober.Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Experience> builder)
         {
             ConfigureExperienceTable(builder);
+            ConfigureExperienceSkillTable(builder);
         }
-                
+
+        
+
         private void ConfigureExperienceTable(EntityTypeBuilder<Experience> builder)
         {
             builder.ToTable("Experiences");
@@ -37,16 +39,24 @@ namespace Sober.Infrastructure.Persistence.Configurations
                     id => id.Value,
                     value => UserId.Create(value))
                 .IsRequired();
+        }
 
-            // Many-to-many relationship with Skills
-            builder
-                .HasMany(x => x.Skills)
-                .WithMany()
-                .UsingEntity<Dictionary<string, object>>(
-                    "ExperienceSkills",
-                    j => j.HasOne<Skill>().WithMany().HasForeignKey("SkillId"),
-                    j => j.HasOne<Experience>().WithMany().HasForeignKey("ExperienceId")
-                );
+        private void ConfigureExperienceSkillTable(EntityTypeBuilder<Experience> builder)
+        {
+            builder.OwnsMany(e => e.Skills, sb =>
+            {
+                sb.ToTable("ExperienceSkillSection");
+                sb.WithOwner()
+                    .HasForeignKey("ExperienceId");
+
+                sb.HasKey("Id", "ExperienceId");
+
+                sb.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ExperienceSectionId")
+                    .HasConversion(id => id.Value, value => ExperienceSectionId.Create(value));
+                sb.Property(e => e.SectionDescription).HasMaxLength(1000);
+            });
         }
     }
 }

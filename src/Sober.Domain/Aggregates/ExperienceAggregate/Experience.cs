@@ -1,5 +1,5 @@
-﻿using Sober.Domain.Aggregates.ExperienceAggregate.ValueObjects;
-using Sober.Domain.Aggregates.SkillAggregate;
+﻿using Sober.Domain.Aggregates.ExperienceAggregate.Entities;
+using Sober.Domain.Aggregates.ExperienceAggregate.ValueObjects;
 using Sober.Domain.Aggregates.UserAggregate.ValueObjects;
 using Sober.Domain.Common.Models;
 
@@ -7,7 +7,7 @@ namespace Sober.Domain.Aggregates.ExperienceAggregate
 {
     public sealed class Experience : AggregateRoot<ExperienceId>
     {
-        private readonly List<Skill> _skills = new();
+        private readonly List<ExperienceSection> _skills = new();
         public string CompanyName { get; private set; } = null!;
         public string? ShortName { get; private set; }
         public string? CompanyLogo { get; private set; }
@@ -17,7 +17,7 @@ namespace Sober.Domain.Aggregates.ExperienceAggregate
         public DateTime EndDate { get; private set; }
         public bool IsFullTimeEmployee { get; private set; }
         public UserId UserId { get; private set; }
-        public IReadOnlyCollection<Skill> Skills => _skills.AsReadOnly();
+        public ICollection<ExperienceSection> Skills => _skills.AsReadOnly();
 
         private Experience(
             ExperienceId experienceId,
@@ -27,9 +27,11 @@ namespace Sober.Domain.Aggregates.ExperienceAggregate
             string companyLogo,
             string designation,
             bool isCurrentEmployee,
+            bool isFullTimeEmployee,
+            List<ExperienceSection> skills,
             DateTime startDate,
-            DateTime endDate,
-            bool isFullTimeEmployee) : base(experienceId)
+            DateTime endDate
+            ) : base(experienceId)
         {
             UserId = userId;
             CompanyName = companyName;
@@ -40,6 +42,7 @@ namespace Sober.Domain.Aggregates.ExperienceAggregate
             StartDate = startDate;
             EndDate = endDate;
             IsFullTimeEmployee = isFullTimeEmployee;
+            _skills = skills;
         }
 
         public static Experience Create(
@@ -49,9 +52,11 @@ namespace Sober.Domain.Aggregates.ExperienceAggregate
             string companyLogo,
             string designation,
             bool isCurrentEmployee,
+            bool isFullTimeEmployee,
+            List<ExperienceSection> skills,
             DateTime startDate,
-            DateTime endDate,
-            bool isFullTimeEmployee)
+            DateTime endDate
+            )
         {
             Experience response = new Experience(
                 ExperienceId.CreateUnique(),
@@ -61,24 +66,13 @@ namespace Sober.Domain.Aggregates.ExperienceAggregate
                 companyLogo,
                 designation,
                 isCurrentEmployee,
+                isFullTimeEmployee,
+                skills,
                 startDate,
-                endDate,
-                isFullTimeEmployee);
+                endDate);
 
             return response;
-        }
-
-        public void AddSkill(Skill skill)
-        {
-            if (!_skills.Contains(skill))
-                _skills.Add(skill);
-        }
-
-        public void RemoveSkill(Skill skill)
-        {
-            if (_skills.Contains(skill))
-                _skills.Remove(skill);
-        }
+        }        
 
         private Experience()
         {
