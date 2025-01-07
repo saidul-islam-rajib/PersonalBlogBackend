@@ -1,6 +1,5 @@
 ﻿using ErrorOr;
 using MediatR;
-using Sober.Application.Pages.Skills.Commands;
 using Sober.Domain.Aggregates.ExperienceAggregate;
 
 namespace Sober.Application.Pages.Experiences.Commands
@@ -12,10 +11,11 @@ namespace Sober.Application.Pages.Experiences.Commands
         string CompanyLogo,
         string Designation,
         bool IsCurrentEmployee,
-        DateTime StartDate,
-        DateTime EndDate,
         bool IsFullTimeEmployee,
-        List<ExperienceSectionCommand> ExperienceSection) : IRequest<ErrorOr<Experience>>;
+        List<ExperienceSectionCommand> ExperienceSection,
+        DateTime StartDate,
+        DateTime EndDate
+        ) : IRequest<ErrorOr<Experience>>;
 
     public record ExperienceSectionCommand(string sectionDescription);
 }

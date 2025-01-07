@@ -1,6 +1,4 @@
-﻿using Sober.Contracts.Request.Skills;
-
-namespace Sober.Contracts.Request
+﻿namespace Sober.Contracts.Request
 {
     public record ExperienceRequest(
         string CompanyName,
@@ -8,8 +6,10 @@ namespace Sober.Contracts.Request
         string CompanyLogo,
         string Designation,
         bool IsCurrentEmployee,
-        DateTime StartDate,
-        DateTime EndDate,
         bool IsFullTimeEmployee,
-        List<SkillRequest> Skills);
+        List<ExperienceSectionRequest> ExperienceSection,
+        DateTime StartDate,
+        DateTime EndDate);
+
+    public record ExperienceSectionRequest(string SectionDescription);
 }
