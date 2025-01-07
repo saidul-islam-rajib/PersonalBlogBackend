@@ -7,7 +7,7 @@ namespace Sober.Domain.Aggregates.ExperienceAggregate
 {
     public sealed class Experience : AggregateRoot<ExperienceId>
     {
-        private readonly List<ExperienceSection> _skills = new();
+        private readonly List<ExperienceSection> _experienceSection = new();
         public string CompanyName { get; private set; } = null!;
         public string? ShortName { get; private set; }
         public string? CompanyLogo { get; private set; }
@@ -17,7 +17,7 @@ namespace Sober.Domain.Aggregates.ExperienceAggregate
         public DateTime EndDate { get; private set; }
         public bool IsFullTimeEmployee { get; private set; }
         public UserId UserId { get; private set; }
-        public ICollection<ExperienceSection> Skills => _skills.AsReadOnly();
+        public ICollection<ExperienceSection> ExperienceSection => _experienceSection.AsReadOnly();
 
         private Experience(
             ExperienceId experienceId,
@@ -28,7 +28,7 @@ namespace Sober.Domain.Aggregates.ExperienceAggregate
             string designation,
             bool isCurrentEmployee,
             bool isFullTimeEmployee,
-            List<ExperienceSection> skills,
+            List<ExperienceSection> experienceSection,
             DateTime startDate,
             DateTime endDate
             ) : base(experienceId)
@@ -42,7 +42,7 @@ namespace Sober.Domain.Aggregates.ExperienceAggregate
             StartDate = startDate;
             EndDate = endDate;
             IsFullTimeEmployee = isFullTimeEmployee;
-            _skills = skills;
+            _experienceSection = experienceSection;
         }
 
         public static Experience Create(
@@ -53,7 +53,7 @@ namespace Sober.Domain.Aggregates.ExperienceAggregate
             string designation,
             bool isCurrentEmployee,
             bool isFullTimeEmployee,
-            List<ExperienceSection> skills,
+            List<ExperienceSection> experienceSection,
             DateTime startDate,
             DateTime endDate
             )
@@ -67,7 +67,7 @@ namespace Sober.Domain.Aggregates.ExperienceAggregate
                 designation,
                 isCurrentEmployee,
                 isFullTimeEmployee,
-                skills,
+                experienceSection,
                 startDate,
                 endDate);
 

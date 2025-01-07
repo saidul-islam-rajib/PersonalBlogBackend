@@ -43,7 +43,7 @@ namespace Sober.Infrastructure.Persistence.Configurations
 
         private void ConfigureExperienceSkillTable(EntityTypeBuilder<Experience> builder)
         {
-            builder.OwnsMany(e => e.Skills, sb =>
+            builder.OwnsMany(e => e.ExperienceSection, sb =>
             {
                 sb.ToTable("ExperienceSkillSection");
                 sb.WithOwner()

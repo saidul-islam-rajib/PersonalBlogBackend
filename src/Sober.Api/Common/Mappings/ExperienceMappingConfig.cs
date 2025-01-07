@@ -22,7 +22,8 @@ namespace Sober.Api.Common.Mappings
                 .Map(dest => dest.CompanyName, src => src.CompanyName);
 
             config.NewConfig<ExperienceSection, ExperienceSectionResponse>()
-                .Map(dest => dest.ExperienceSectionId, src => src.Id.Value);
+                .Map(dest => dest.ExperienceSectionId, src => src.Id.Value)
+                .Map(dest => dest.SectionDescription, src => src.SectionDescription);
         }
     }
 }

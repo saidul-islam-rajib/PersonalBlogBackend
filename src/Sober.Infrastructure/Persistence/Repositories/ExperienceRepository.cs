@@ -34,14 +34,14 @@ namespace Sober.Infrastructure.Persistence.Repositories
 
         public async Task<IEnumerable<Experience>> GetAllExperienceAsync()
         {
-            var response = await _dbContext.Experiences.Include(x => x.Skills).ToListAsync();
+            var response = await _dbContext.Experiences.AsNoTracking().OrderByDescending(e => e.EndDate).ToListAsync();
             return response;
         }
 
         public async Task<Experience?> GetExperienceByIdAsync(Guid experienceId)
         {
             var response = await _dbContext.Experiences
-                .Include(experience => experience.Skills)
+                .Include(experience => experience.ExperienceSection)
                 .FirstOrDefaultAsync(ex => ex.Id.Equals(new ExperienceId(experienceId)));
 
             return response;
