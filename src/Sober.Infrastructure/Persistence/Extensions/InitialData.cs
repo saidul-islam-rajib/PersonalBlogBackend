@@ -50,7 +50,7 @@ internal class InitialData
                 "amsl.png",
                 "Junior Software Engineer",
                 true,
-                new DateTime(2022, 10, 11),
+                new DateTime(2023, 01, 11),
                 new DateTime(2025, 01, 02),
                 true)
         };
