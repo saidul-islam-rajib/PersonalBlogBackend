@@ -2,7 +2,7 @@
 using MediatR;
 using Sober.Application.Interfaces;
 using Sober.Domain.Aggregates.EducationAggregate;
-using Sober.Domain.Aggregates.SkillAggregate;
+using Sober.Domain.Aggregates.EducationAggregate.Entities;
 using Sober.Domain.Aggregates.UserAggregate.ValueObjects;
 
 namespace Sober.Application.Pages.Educations.Commands
@@ -21,22 +21,15 @@ namespace Sober.Application.Pages.Educations.Commands
         {
             await Task.CompletedTask;
 
-            List<Skill> skills = request.Skills.Select(skillDto =>
-                Skill.Create(skillDto.skillName)
-            ).ToList();
-
             Education education = Education.Create(
                 UserId.Create(request.UserId),
                 request.InstituteName,
                 request.InstituteLogo,
                 request.Department,
+                request.IsCurrentStudent,
+                request.EducationSection.ConvertAll(section => EducationSection.Create(section.sectionDescripton)),
                 request.StartDate,
                 request.EndDate);
-
-            foreach (Skill skill in skills)
-            {
-                education.AddSkill(skill);
-            }
 
             _educationRepository.AddEducation(education);
             return education;

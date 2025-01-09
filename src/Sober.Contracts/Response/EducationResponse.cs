@@ -1,6 +1,4 @@
-﻿using Sober.Contracts.Response.Skills;
-
-namespace Sober.Contracts.Response
+﻿namespace Sober.Contracts.Response
 {
     public record EducationResponse(
         Guid EducationId,
@@ -8,7 +6,10 @@ namespace Sober.Contracts.Response
         string InstituteName,
         string InstituteLogo,
         string Department,
+        bool IsCurrentStudent,
+        List<EducationSectionResponse> EducationSection,
         DateTime StartDate,
-        DateTime EndDate,
-        List<SkillResponse> Skills);
+        DateTime EndDate);
+
+    public record EducationSectionResponse(string EducationSectionId, string SectionDescription);
 }

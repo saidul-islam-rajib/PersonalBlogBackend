@@ -1,6 +1,5 @@
 ﻿using ErrorOr;
 using MediatR;
-using Sober.Application.Pages.Skills.Commands;
 using Sober.Domain.Aggregates.EducationAggregate;
 
 namespace Sober.Application.Pages.Educations.Commands
@@ -10,7 +9,10 @@ namespace Sober.Application.Pages.Educations.Commands
         string InstituteName,
         string InstituteLogo,
         string Department,
+        bool IsCurrentStudent,
+        List<EducationSectionCommand> EducationSection,
         DateTime StartDate,
-        DateTime EndDate,
-        List<CreateSkillCommand> Skills) : IRequest<ErrorOr<Education>>;
+        DateTime EndDate) : IRequest<ErrorOr<Education>>;
+
+    public record EducationSectionCommand(string sectionDescripton);
 }

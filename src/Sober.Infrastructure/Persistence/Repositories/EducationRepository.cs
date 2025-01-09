@@ -2,7 +2,6 @@
 using Sober.Application.Interfaces;
 using Sober.Domain.Aggregates.EducationAggregate;
 using Sober.Domain.Aggregates.EducationAggregate.ValueObjects;
-using Sober.Domain.Aggregates.ExperienceAggregate.ValueObjects;
 
 namespace Sober.Infrastructure.Persistence.Repositories
 {
@@ -35,14 +34,15 @@ namespace Sober.Infrastructure.Persistence.Repositories
 
         public async Task<IEnumerable<Education>> GetAllEducations()
         {
-            IEnumerable<Education> response = await _dbContext.Educations.Include(x => x.Skills).ToListAsync();
+            IEnumerable<Education> response = await _dbContext.Educations.AsNoTracking().OrderByDescending(e => e.EndDate).ToListAsync();
             return response;
         }
 
         public async Task<Education?> GetEducationById(Guid id)
         {
-            var response = await _dbContext.Educations.Include(education => education.Skills)
-                .FirstOrDefaultAsync(edu => edu.Id.Equals(new ExperienceId(id)));
+            var response = await _dbContext.Educations
+                .Include(education => education.EducationSection)
+                .FirstOrDefaultAsync(edu => edu.Id.Equals(new EducationId(id)));
 
             return response;
         }

@@ -1,5 +1,6 @@
 ﻿using Sober.Domain.Aggregates.CommentAggregate;
 using Sober.Domain.Aggregates.EducationAggregate;
+using Sober.Domain.Aggregates.EducationAggregate.Entities;
 using Sober.Domain.Aggregates.ExperienceAggregate;
 using Sober.Domain.Aggregates.ExperienceAggregate.Entities;
 using Sober.Domain.Aggregates.PostAggregate;
@@ -22,6 +23,11 @@ internal class InitialData
                 "Daffodil International University",
                 "diu.png",
                 "Computer Science & Engineering",
+                false,
+                new List<EducationSection>
+                {
+                    EducationSection.Create("Learned basics of Algorithms, Data Structure, Computer Networks, Operating Systems etc")
+                },
                 new DateTime(2018, 01, 01),
                 new DateTime(2022, 02, 22)
             )

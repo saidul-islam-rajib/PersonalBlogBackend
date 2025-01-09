@@ -2,9 +2,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Sober.Domain.Aggregates.EducationAggregate;
 using Sober.Domain.Aggregates.EducationAggregate.ValueObjects;
-using Sober.Domain.Aggregates.ExperienceAggregate;
-using Sober.Domain.Aggregates.PostAggregate.ValueObjects;
-using Sober.Domain.Aggregates.SkillAggregate;
 using Sober.Domain.Aggregates.UserAggregate.ValueObjects;
 
 namespace Sober.Infrastructure.Persistence.Configurations
@@ -14,12 +11,12 @@ namespace Sober.Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Education> builder)
         {
             ConfigureEducationTable(builder);
-        }
+            ConfigureEducationSectionTable(builder);
+        }        
 
         private void ConfigureEducationTable(EntityTypeBuilder<Education> builder)
         {
             builder.ToTable("Educations");
-
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id)
@@ -38,6 +35,8 @@ namespace Sober.Infrastructure.Persistence.Configurations
                 .HasMaxLength(50)
                 .IsRequired();
 
+            builder.Property(x => x.IsCurrentStudent);
+
             builder.Property(x => x.StartDate)
                 .IsRequired();
 
@@ -46,29 +45,23 @@ namespace Sober.Infrastructure.Persistence.Configurations
 
             builder.Property(x => x.UserId)
                 .HasConversion(id => id.Value, value => UserId.Create(value))
-                .IsRequired();
+                .IsRequired();            
+        }
 
-            // Configure the many-to-many relationship
-            builder
-                .HasMany(x => x.Skills)
-                .WithMany(x => x.Educations)
-                .UsingEntity<Dictionary<string, object>>(
-                    "EducationSkills",
-                    j => j
-                        .HasOne<Skill>()
-                        .WithMany()
-                        .HasForeignKey("SkillId")
-                        .OnDelete(DeleteBehavior.Cascade),
-                    j => j
-                        .HasOne<Education>()
-                        .WithMany()
-                        .HasForeignKey("EducationId")
-                        .OnDelete(DeleteBehavior.Cascade),
-                    j =>
-                    {
-                        j.ToTable("EducationSkills");
-                        j.HasKey("EducationId", "SkillId");
-                    });
+        private void ConfigureEducationSectionTable(EntityTypeBuilder<Education> builder)
+        {
+            builder.OwnsMany(e => e.EducationSection, sb =>
+            {
+                sb.ToTable("EducationSection");
+                sb.WithOwner()
+                    .HasForeignKey("EducationId");
+                sb.HasKey("Id", "EducationId");
+                sb.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("EducationSectionId")
+                    .HasConversion(id => id.Value, value => EducationSectionId.Create(value));
+                sb.Property(e => e.SectionDescription).HasMaxLength(1000);
+            });
         }
     }
 }

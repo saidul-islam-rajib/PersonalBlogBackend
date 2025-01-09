@@ -45,7 +45,7 @@ namespace Sober.Infrastructure.Persistence.Configurations
         {
             builder.OwnsMany(e => e.ExperienceSection, sb =>
             {
-                sb.ToTable("ExperienceSkillSection");
+                sb.ToTable("ExperienceSection");
                 sb.WithOwner()
                     .HasForeignKey("ExperienceId");
 
