@@ -26,7 +26,8 @@ internal class InitialData
                 false,
                 new List<EducationSection>
                 {
-                    EducationSection.Create("Learned basics of Algorithms, Data Structure, Computer Networks, Operating Systems etc")
+                    EducationSection.Create("Learned basics of Algorithms, Data Structure, Computer Networks, Operating Systems etc"),
+                    EducationSection.Create("Participated several programming contests including ICPC, IUPC, CPC etc")
                 },
                 new DateTime(2018, 01, 01),
                 new DateTime(2022, 02, 22)
@@ -64,7 +65,9 @@ internal class InitialData
                 true,
                 new List<ExperienceSection>
                 {
-                    ExperienceSection.Create("Improved application performance around 30%")
+                    ExperienceSection.Create("Design, Develop and Maintain software applicatoin"),
+                    ExperienceSection.Create("Fix bugs of an existing software application"),
+                    ExperienceSection.Create("Got extensive knowledge on microservices integration, devops pipeline etc")
                 },
                 new DateTime(2023, 01, 11),
                 new DateTime(2025, 01, 02))
