@@ -32,15 +32,6 @@ namespace Sober.Application.Services.Authentication.Commands
                 return Errors.User.DuplicateEmail;
             }
 
-            // 2. Create user (generate unique ID) & persist to DB
-            //var user = new User
-            //{
-            //    FirstName = command.FirstName,
-            //    LastName = command.LastName,
-            //    Email = command.Email,
-            //    Password = command.Password
-            //};
-
             var user = User.Create(
                     command.FirstName,
                     command.LastName,

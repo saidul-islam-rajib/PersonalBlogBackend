@@ -7,5 +7,6 @@ namespace Sober.Application.Common.Interfaces.Persistence
         Task<User> GetDefaultUser();
         User? GetUserByEmail(string email);
         void Add(User user);
+        Task<User> GetUserByIdAsync(Guid userId);
     }
 }

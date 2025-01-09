@@ -32,4 +32,20 @@ public class UserController : ApiController
         var response = _mapper.Map<UserResponse>(user);
         return Ok(response);
     }
+
+    [HttpGet]
+    [Route("{userId}")]
+    public async Task<IActionResult> GetUserById(Guid userId)
+    {
+        var query = new GetUserByIdQuery(userId);
+        var user = await _mediator.Send(query);
+
+        if(user is null)
+        {
+            return NotFound();
+        }
+
+        var response = _mapper.Map<UserResponse>(user);
+        return Ok(response);
+    }
 }
